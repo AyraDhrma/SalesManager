@@ -6,4 +6,5 @@
     <color name="black_overlay">#66000000</color>
     <color name="colorError">#f44336</color>
     <color name="colorYellow">#f1c40f</color>
+    <color name="colorFontSecondary">#34495e</color>
 </resources>

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Ascan</string>
+    <string name="app_name">Scanner</string>
     <string name="scan_assets">SCAN ASSETS</string>
     <string name="turn_on_flashlight">Off</string>
     <string name="scan">Scan</string>
@@ -11,4 +11,7 @@
     <string name="retry">Retry</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="login">Login</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
 </resources>

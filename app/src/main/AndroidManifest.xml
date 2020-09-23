@@ -16,7 +16,10 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup,UnusedAttribute">
-        <activity android:name=".ui.submit.SubmitActivity"></activity>
+        <activity
+            android:name=".ui.login.LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ui.submit.SubmitActivity" />
         <activity
             android:name=".ui.splash.SplashScreen"
             android:screenOrientation="portrait">
