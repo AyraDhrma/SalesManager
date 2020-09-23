@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.journeyapps.barcodescanner.BarcodeView
+            android:id="@+id/zxing_barcode_surface"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@id/zxing_viewfinder_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:zxing_framing_rect_height="700dp"
+            app:zxing_framing_rect_width="700dp" />
+
+        <com.journeyapps.barcodescanner.ViewfinderView
+            android:id="@+id/zxing_viewfinder_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/zxing_status_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:zxing_possible_result_points="@color/zxing_custom_possible_result_points"
+            app:zxing_result_view="@color/zxing_custom_result_view"
+            app:zxing_viewfinder_laser="@color/zxing_custom_viewfinder_laser"
+            app:zxing_viewfinder_mask="@color/zxing_custom_viewfinder_mask" />
+
+        <TextView
+            android:id="@+id/zxing_status_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
+            android:fontFamily="@font/rubik_black"
+            android:gravity="center_horizontal"
+            android:paddingTop="4dp"
+            android:paddingBottom="8dp"
+            android:text="SCANNER"
+            android:textColor="@color/colorPrimary"
+            android:visibility="gone"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</merge>
