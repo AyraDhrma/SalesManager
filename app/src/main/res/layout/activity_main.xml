@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -16,25 +15,34 @@
             style="@style/TitleLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Scanner"
-            app:layout_constraintLeft_toLeftOf="parent"
             android:layout_margin="16dp"
+            android:text="@string/halo"
+            app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/button_scan_main"
-            style="@style/Widget.MaterialComponents.Button"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/username_label_main"
+            style="@style/SubTitleLabel"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/scan_assets"
+            android:layout_marginStart="4dp"
+            android:text="@string/app_name"
+            app:layout_constraintBottom_toBottomOf="@+id/title_label_main"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/title_label_main" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/button_scan_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
             android:layout_margin="16dp"
-            android:fontFamily="@font/rubik_bold"
-            android:background="@drawable/background_button_black"
-            android:textColor="@color/colorAccent"
-            android:textSize="18sp"
-            app:layout_constraintTop_toBottomOf="@id/title_label_main"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            android:contentDescription="@string/app_name"
+            app:borderWidth="0dp"
+            app:fabSize="normal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/qr_code_black" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -2,7 +2,9 @@ package id.arya.scanat.api
 
 import id.arya.scanat.model.request.RequestParams
 import id.arya.scanat.model.response.CheckDataResponse
+import id.arya.scanat.model.response.LoginResponse
 import id.arya.scanat.model.response.SplashScreenResponse
+import id.arya.scanat.model.response.SubmitResponse
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -19,6 +21,17 @@ interface ApiInterface {
         @Body data: RequestParams
     ): Call<CheckDataResponse>
 
+    @POST("Auth/login")
+    fun hitLogin(
+        @Header("x-api-key") apiKey: String,
+        @Body data: RequestParams
+    ): Call<LoginResponse>
+
+    @POST("Assets/insert_assets")
+    fun hitSubmitAsset(
+        @Header("x-api-key") apiKey: String,
+        @Body data: RequestParams
+    ): Call<SubmitResponse>
 
 //
 //    @POST("menu/content_menu")

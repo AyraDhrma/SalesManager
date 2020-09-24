@@ -106,4 +106,7 @@ dependencies {
     // Lottie
     implementation 'com.airbnb.android:lottie:3.4.0'
 
+    // FAB
+    implementation 'com.robertlevonyan.view:CustomFloatingActionButton:3.0.1'
+
 }

@@ -2,7 +2,7 @@
     <string name="app_name">Scanner</string>
     <string name="scan_assets">SCAN ASSETS</string>
     <string name="turn_on_flashlight">Off</string>
-    <string name="scan">Scan</string>
+    <string name="scan">Scan QR/Barcode</string>
     <string name="turn_off_flashlight">On</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="scan_barcode_not_found">Result not found</string>
@@ -14,4 +14,9 @@
     <string name="login">Login</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
+    <string name="halo">Halo,</string>
+    <string name="submit_stock">Submit Asset</string>
+    <string name="submit_assets">Submit</string>
+    <string name="status_submit">Status Submit</string>
+    <string name="press_again_to_exit_app">Press again to exit app</string>
 </resources>

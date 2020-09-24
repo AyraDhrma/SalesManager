@@ -4,32 +4,65 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.view.View
+import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
 import com.google.zxing.integration.android.IntentIntegrator
+import dagger.hilt.android.AndroidEntryPoint
 import id.arya.scanat.R
-import id.arya.scanat.model.request.RequestParams
-import id.arya.scanat.repository.MainRepository
+import id.arya.scanat.library.SharedPrefManager
 import id.arya.scanat.ui.dialog.DialogLoading
-import id.arya.scanat.ui.dialog.SubmitDataDialog
+import id.arya.scanat.ui.login.LoginActivity
 import id.arya.scanat.ui.scan.ScannerActivity
 import id.arya.scanat.ui.submit.SubmitActivity
-import id.arya.scanat.viewmodel.MainViewModel
-import id.arya.scanat.viewmodelfactory.MainFactory
 import kotlinx.android.synthetic.main.activity_main.*
+import javax.inject.Inject
 
+
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+
+    private var doubleBackToExitPressedOnce = false
+    @Inject
+    lateinit var sharedPrefManager: SharedPrefManager
+
+    //    private var isShowDialog = false
+    private val loadingDialog = DialogLoading()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        checkUserAlreadyLogin()
 
         button_scan_main.setOnClickListener {
             scanIntent()
         }
+    }
+
+    private fun checkUserAlreadyLogin() {
+        if (sharedPrefManager.loadUsername() == "") {
+            startActivity(Intent(this@MainActivity, LoginActivity::class.java))
+            finish()
+        } else {
+            username_label_main.text = sharedPrefManager.loadUsername()
+        }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+
+        if (doubleBackToExitPressedOnce) {
+            finish()
+            return
+        }
+        doubleBackToExitPressedOnce = true
+        val snackbar = Snackbar.make(
+            button_scan_main,
+            resources.getString(R.string.press_again_to_exit_app),
+            Snackbar.LENGTH_SHORT
+        )
+        snackbar.view.setBackgroundColor(resources.getColor(R.color.colorError))
+        Handler().postDelayed({ doubleBackToExitPressedOnce = false }, 2000)
     }
 
     private fun scanIntent() {
@@ -59,12 +92,11 @@ class MainActivity : AppCompatActivity() {
                     scanIntent()
                 }.show()
             } else {
-                val bundle = Bundle()
-                bundle.putString("result", intentResult.contents)
-                val intent = Intent(this@MainActivity, SubmitActivity::class.java)
-                intent.putExtras(bundle)
-                startActivity(intent)
+//                isShowDialog = true
 
+                val intent = Intent(this@MainActivity, SubmitActivity::class.java)
+                intent.putExtra("result", intentResult.contents)
+                startActivity(intent)
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data)
@@ -74,6 +106,24 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+//    override fun onResumeFragments() {
+//        super.onResumeFragments()
+//
+//        if (isShowDialog) {
+//            isShowDialog = false
+//
+//            showLoadingDialog()
+//        }
+//    }
+
+    private fun showLoadingDialog() {
+        loadingDialog.show(supportFragmentManager, "LOADING")
+    }
+
+    private fun dismissLoadingDialog() {
+        loadingDialog.dismiss()
     }
 
 }

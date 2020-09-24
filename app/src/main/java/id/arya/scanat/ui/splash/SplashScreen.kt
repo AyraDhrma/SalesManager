@@ -2,13 +2,10 @@ package id.arya.scanat.ui.splash
 
 import android.content.Intent
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.snackbar.Snackbar
 import id.arya.scanat.R
 import id.arya.scanat.model.response.SplashScreenResponse
@@ -16,9 +13,7 @@ import id.arya.scanat.repository.MainRepository
 import id.arya.scanat.ui.main.MainActivity
 import id.arya.scanat.viewmodel.SplashViewModel
 import id.arya.scanat.viewmodelfactory.SplashScreenFactory
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_splash_screen.*
-import kotlinx.android.synthetic.main.fragment_dialog_loading.*
 
 class SplashScreen : AppCompatActivity() {
 

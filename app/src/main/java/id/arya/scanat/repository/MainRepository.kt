@@ -1,14 +1,16 @@
 package id.arya.scanat.repository
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import id.arya.scanat.api.ApiService
 import id.arya.scanat.model.request.RequestParams
 import id.arya.scanat.model.response.CheckDataResponse
+import id.arya.scanat.model.response.LoginResponse
 import id.arya.scanat.model.response.SplashScreenResponse
+import id.arya.scanat.model.response.SubmitResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import timber.log.Timber
 import javax.inject.Inject
 
 class MainRepository
@@ -23,7 +25,7 @@ constructor(url: String) {
 
         apiService.getSplashScreen().enqueue(object : Callback<SplashScreenResponse> {
             override fun onFailure(call: Call<SplashScreenResponse>, t: Throwable) {
-                Log.d(TAG, t.localizedMessage)
+                Timber.d(TAG, t.localizedMessage)
                 responseApi.postValue(null)
             }
 
@@ -33,9 +35,9 @@ constructor(url: String) {
             ) {
                 if (response.isSuccessful) {
                     responseApi.postValue(response.body())
-                    Log.d(TAG, response.body().toString())
+                    Timber.d(TAG, response.body().toString())
                 } else {
-                    Log.d(TAG, response.errorBody().toString())
+                    Timber.d(TAG, response.errorBody().toString())
                 }
             }
 
@@ -52,7 +54,7 @@ constructor(url: String) {
         apiService.hitCheckData(apiKey, data)
             .enqueue(object : Callback<CheckDataResponse> {
                 override fun onFailure(call: Call<CheckDataResponse>, t: Throwable) {
-                    Log.d(TAG, t.localizedMessage)
+                    Timber.d(TAG, t.localizedMessage)
                     responseApi.postValue(null)
                 }
 
@@ -62,9 +64,64 @@ constructor(url: String) {
                 ) {
                     if (response.isSuccessful) {
                         responseApi.postValue(response.body())
-                        Log.d(TAG, response.body().toString())
+                        Timber.d(TAG, response.body().toString())
                     } else {
-                        Log.d(TAG, response.errorBody().toString())
+                        Timber.d(TAG, response.errorBody().toString())
+                    }
+                }
+
+            })
+        return responseApi
+    }
+
+    fun hitLogin(
+        apiKey: String,
+        data: RequestParams
+    ): MutableLiveData<LoginResponse> {
+        val responseApi: MutableLiveData<LoginResponse> = MutableLiveData()
+
+        apiService.hitLogin(apiKey, data)
+            .enqueue(object : Callback<LoginResponse> {
+                override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                    Timber.d(TAG, t.localizedMessage)
+                    responseApi.postValue(null)
+                }
+
+                override fun onResponse(
+                    call: Call<LoginResponse>,
+                    response: Response<LoginResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        responseApi.postValue(response.body())
+                        Timber.d(TAG, response.body().toString())
+                    } else {
+                        Timber.d(TAG, response.errorBody().toString())
+                    }
+                }
+
+            })
+        return responseApi
+    }
+
+    fun hitSubmitAsset(apiKey: String, params: RequestParams): MutableLiveData<SubmitResponse> {
+        val responseApi: MutableLiveData<SubmitResponse> = MutableLiveData()
+
+        apiService.hitSubmitAsset(apiKey, params)
+            .enqueue(object : Callback<SubmitResponse> {
+                override fun onFailure(call: Call<SubmitResponse>, t: Throwable) {
+                    Timber.d(TAG, t.localizedMessage)
+                    responseApi.postValue(null)
+                }
+
+                override fun onResponse(
+                    call: Call<SubmitResponse>,
+                    response: Response<SubmitResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        responseApi.postValue(response.body())
+                        Timber.d(TAG, response.body().toString())
+                    } else {
+                        Timber.d(TAG, response.errorBody().toString())
                     }
                 }
 
