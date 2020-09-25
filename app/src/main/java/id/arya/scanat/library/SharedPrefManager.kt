@@ -40,4 +40,19 @@ constructor(@ApplicationContext val context: Context) {
         return sharedPreferences?.getString(USERNAME, "")
     }
 
+    fun clearUserData() {
+        val sharedPreferences =
+            context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
+        val edit = sharedPreferences?.edit()
+        edit?.putString(USERNAME, "")
+        edit?.putString(PASSWORD, "")
+        edit?.putString(NAMA, "")
+        edit?.putString(FOTO, "")
+        edit?.putString(IDROLE, "")
+        edit?.putString(EMAIL, "")
+        edit?.putString(PHONE, "")
+        edit?.putString(MESSAGE, "")
+        edit?.apply()
+    }
+
 }

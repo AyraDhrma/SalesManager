@@ -84,7 +84,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/background_button_black"
             android:fontFamily="@font/rubik_bold"
-            android:padding="16dp"
+            android:padding="24dp"
             android:text="@string/login"
             android:textColor="@color/colorAccent"
             android:textSize="20sp"

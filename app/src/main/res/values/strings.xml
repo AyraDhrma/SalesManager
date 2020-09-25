@@ -19,4 +19,5 @@
     <string name="submit_assets">Submit</string>
     <string name="status_submit">Status Submit</string>
     <string name="press_again_to_exit_app">Press again to exit app</string>
+    <string name="insert_manual">" Insert Manual"</string>
 </resources>

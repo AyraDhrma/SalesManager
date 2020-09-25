@@ -37,6 +37,7 @@ constructor(url: String) {
                     responseApi.postValue(response.body())
                     Timber.d(TAG, response.body().toString())
                 } else {
+                    responseApi.postValue(null)
                     Timber.d(TAG, response.errorBody().toString())
                 }
             }

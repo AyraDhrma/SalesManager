@@ -18,7 +18,6 @@ import id.arya.scanat.ui.submit.SubmitActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
-
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
@@ -37,6 +36,12 @@ class MainActivity : AppCompatActivity() {
         button_scan_main.setOnClickListener {
             scanIntent()
         }
+
+        button_manual_submit.setOnClickListener {
+            val intent = Intent(this@MainActivity, SubmitActivity::class.java)
+            intent.putExtra("result", "")
+            startActivity(intent)
+        }
     }
 
     private fun checkUserAlreadyLogin() {
@@ -49,9 +54,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        super.onBackPressed()
-
         if (doubleBackToExitPressedOnce) {
+            sharedPrefManager.clearUserData()
             finish()
             return
         }
@@ -61,7 +65,8 @@ class MainActivity : AppCompatActivity() {
             resources.getString(R.string.press_again_to_exit_app),
             Snackbar.LENGTH_SHORT
         )
-        snackbar.view.setBackgroundColor(resources.getColor(R.color.colorError))
+        snackbar.view.setBackgroundColor(resources.getColor(R.color.colorPrimary))
+        snackbar.show()
         Handler().postDelayed({ doubleBackToExitPressedOnce = false }, 2000)
     }
 

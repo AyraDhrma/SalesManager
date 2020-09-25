@@ -31,7 +31,24 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintStart_toEndOf="@+id/title_label_main" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
+        <Button
+            android:id="@+id/button_manual_submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:background="@drawable/background_button_black"
+            android:fontFamily="@font/rubik_bold"
+            android:padding="16dp"
+            android:text="Add Manual Asset"
+            android:textAllCaps="false"
+            android:textColor="@color/colorAccent"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/username_label_main" />
+
+        <com.robertlevonyan.views.customfloatingactionbutton.FloatingActionButton
             android:id="@+id/button_scan_main"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -39,10 +56,11 @@
             android:layout_margin="16dp"
             android:contentDescription="@string/app_name"
             app:borderWidth="0dp"
-            app:fabSize="normal"
+            app:fabColor="@color/colorPrimary"
+            app:fabCustomSize="64dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@drawable/qr_code_black" />
+            app:fabIcon="@drawable/qr_code_black" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

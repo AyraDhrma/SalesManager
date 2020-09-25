@@ -32,7 +32,7 @@ class SplashScreen : AppCompatActivity() {
 
         splashViewModel.hitSplashScreen().observe(this, Observer<SplashScreenResponse> { response ->
             if (response != null) {
-                if (response.info == "scanat") {
+                if (response.info == "success") {
                     startActivity(Intent(this@SplashScreen, MainActivity::class.java))
                     finish()
                 }
@@ -53,7 +53,7 @@ class SplashScreen : AppCompatActivity() {
     }
 
     private fun initDependency() {
-        val url = "http://202.157.186.151/managemenaset/"
+        val url = "http://202.157.186.151/assetmanagementapi/"
         splashScreenFactory = SplashScreenFactory(MainRepository(url))
         splashViewModel = ViewModelProvider(this, splashScreenFactory)[SplashViewModel::class.java]
     }

@@ -87,6 +87,7 @@ class LoginActivity : AppCompatActivity() {
                         Snackbar.LENGTH_LONG
                     )
                     snackbar.view.setBackgroundColor(resources.getColor(R.color.colorError))
+                    snackbar.show()
                 }
             })
     }

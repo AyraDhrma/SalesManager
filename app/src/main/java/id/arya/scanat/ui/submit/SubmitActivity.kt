@@ -16,6 +16,8 @@ import id.arya.scanat.ui.dialog.DialogLoading
 import id.arya.scanat.viewmodel.MainViewModel
 import id.arya.scanat.viewmodelfactory.MainFactory
 import kotlinx.android.synthetic.main.activity_submit.*
+import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -46,34 +48,51 @@ class SubmitActivity : AppCompatActivity() {
     }
 
     private fun checkDataFromDatabase() {
-        showLoadingDialog()
-        val requestParams = intent.getStringExtra("result")?.let { RequestParams(it) }
-        requestParams?.let {
-            mainViewModel.hitCheckData("f99aecef3d12e02dcbb6260bbdd35189c89e6e73", it)
-                .observe(this, Observer { response ->
-                    dismissLoadingDialog()
-                    if (response.rc == "0000") {
-                        setResultScan()
-                        procdate_value.setText(response.data[0].proc_date)
-                        description_value.setText(response.data[0].asset_desc)
-                        location_value.setText(response.data[0].location)
-                        life_value.setText(response.data[0].life)
-                        button_submit.setOnClickListener {
-                            intentStatusSubmit()
+        if (intent.getStringExtra("result") == "manual_submit") {
+            val currentTime: String =
+                SimpleDateFormat("yyyy/mm/dd HH.mm.ss", Locale.getDefault()).format(
+                    Date()
+                )
+            procdate_value.setText(currentTime)
+            button_submit.setOnClickListener {
+                intentStatusSubmit()
+            }
+        } else {
+            showLoadingDialog()
+            val requestParams = intent.getStringExtra("result")?.let { RequestParams(it) }
+            requestParams?.let {
+                mainViewModel.hitCheckData("f99aecef3d12e02dcbb6260bbdd35189c89e6e73", it)
+                    .observe(this, Observer { response ->
+                        dismissLoadingDialog()
+                        if (response.rc == "0000") {
+                            setResultScan()
+                            procdate_value.setText(response.data[0].proc_date)
+                            description_value.setText(response.data[0].asset_desc)
+                            location_value.setText(response.data[0].location)
+                            life_value.setText(response.data[0].life)
+                            button_submit.setOnClickListener {
+                                intentStatusSubmit()
+                            }
+                        } else {
+                            val snackbar = Snackbar.make(
+                                asset_code_value,
+                                response.message + resources.getString(R.string.insert_manual),
+                                Snackbar.LENGTH_LONG
+                            )
+                            snackbar.view.setBackgroundColor(resources.getColor(R.color.colorError))
+                            snackbar.show()
+                            setResultScan()
+                            val currentTime: String =
+                                SimpleDateFormat("yyyy/mm/dd HH.mm.ss", Locale.getDefault()).format(
+                                    Date()
+                                )
+                            procdate_value.setText(currentTime)
+                            button_submit.setOnClickListener {
+                                intentStatusSubmit()
+                            }
                         }
-                    } else {
-                        val snackbar = Snackbar.make(
-                            asset_code_value,
-                            response.message,
-                            Snackbar.LENGTH_LONG
-                        )
-                        snackbar.view.setBackgroundColor(resources.getColor(R.color.colorError))
-                        setResultScan()
-                        button_submit.setOnClickListener {
-                            intentStatusSubmit()
-                        }
-                    }
-                })
+                    })
+            }
         }
     }
 
@@ -92,8 +111,8 @@ class SubmitActivity : AppCompatActivity() {
     }
 
     private fun setDataParams(): String {
-        return sharedPrefManager.loadUsername() + "|" + procdate_value.text + "|" +
-                asset_code_value.text + "|" + description_value.text + "|" +
+        return sharedPrefManager.loadUsername() + "|" + asset_code_value.text + "|" +
+                procdate_value.text + "|" + description_value.text + "|" +
                 location_value.text + "|" + location_value.text
     }
 
