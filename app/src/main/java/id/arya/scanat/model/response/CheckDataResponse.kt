@@ -13,26 +13,26 @@ data class CheckDataResponse(
 ) {
 
     data class Data(
-        @SerializedName("id") @Expose val id: String,
-        @SerializedName("proc_date") @Expose val proc_date: String,
-        @SerializedName("report_prd") @Expose val report_prd: String,
-        @SerializedName("reptype") @Expose val reptype: String,
-        @SerializedName("comp_code") @Expose val comp_code: String,
-        @SerializedName("valtype") @Expose val valtype: String,
-        @SerializedName("account") @Expose val account: String,
-        @SerializedName("asset") @Expose val asset: String,
-        @SerializedName("no_asset") @Expose val no_asset: String,
-        @SerializedName("sno") @Expose val sno: String,
-        @SerializedName("depky") @Expose val depky: String,
-        @SerializedName("plant") @Expose val plant: String,
-        @SerializedName("capdate") @Expose val capdate: String,
-        @SerializedName("odepstart") @Expose val odepstart: String,
-        @SerializedName("costctr") @Expose val costctr: String,
-        @SerializedName("asset_desc") @Expose val asset_desc: String,
-        @SerializedName("life") @Expose val life: String,
-        @SerializedName("location") @Expose val location: String,
-        @SerializedName("created") @Expose val created: String,
-        @SerializedName("modified") @Expose val modified: String
+        @SerializedName("mb_id") @Expose val id: String,
+        @SerializedName("mb_proc_date") @Expose val proc_date: String,
+        @SerializedName("mb_report_prd") @Expose val report_prd: String,
+        @SerializedName("mb_reptype") @Expose val reptype: String,
+        @SerializedName("mb_comp_code") @Expose val comp_code: String,
+        @SerializedName("mb_valtype") @Expose val valtype: String,
+        @SerializedName("mb_account") @Expose val account: String,
+        @SerializedName("mb_asset") @Expose val asset: String,
+        @SerializedName("mb_no_asset") @Expose val no_asset: String,
+        @SerializedName("mb_sno") @Expose val sno: String,
+        @SerializedName("mb_depky") @Expose val depky: String,
+        @SerializedName("mb_plant") @Expose val plant: String,
+        @SerializedName("mb_capdate") @Expose val capdate: String,
+        @SerializedName("mb_odepstart") @Expose val odepstart: String,
+        @SerializedName("mb_costctr") @Expose val costctr: String,
+        @SerializedName("mb_asset_desc") @Expose val asset_desc: String,
+        @SerializedName("mb_life") @Expose val life: String,
+        @SerializedName("mb_lc_kode") @Expose val location: String,
+        @SerializedName("mb_created") @Expose val created: String,
+        @SerializedName("mb_modified") @Expose val modified: String
     )
 
 }

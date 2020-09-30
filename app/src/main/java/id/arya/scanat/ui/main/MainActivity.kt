@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
 
         button_manual_submit.setOnClickListener {
             val intent = Intent(this@MainActivity, SubmitActivity::class.java)
-            intent.putExtra("result", "")
+            intent.putExtra("result", "manual_submit")
             startActivity(intent)
         }
     }

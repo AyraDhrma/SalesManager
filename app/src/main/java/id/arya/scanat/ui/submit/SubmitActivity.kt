@@ -16,6 +16,7 @@ import id.arya.scanat.ui.dialog.DialogLoading
 import id.arya.scanat.viewmodel.MainViewModel
 import id.arya.scanat.viewmodelfactory.MainFactory
 import kotlinx.android.synthetic.main.activity_submit.*
+import timber.log.Timber
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
@@ -50,10 +51,11 @@ class SubmitActivity : AppCompatActivity() {
     private fun checkDataFromDatabase() {
         if (intent.getStringExtra("result") == "manual_submit") {
             val currentTime: String =
-                SimpleDateFormat("yyyy/mm/dd HH.mm.ss", Locale.getDefault()).format(
+                SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(
                     Date()
                 )
             procdate_value.setText(currentTime)
+            reportprd_value.setText(currentTime)
             button_submit.setOnClickListener {
                 intentStatusSubmit()
             }
@@ -70,6 +72,18 @@ class SubmitActivity : AppCompatActivity() {
                             description_value.setText(response.data[0].asset_desc)
                             location_value.setText(response.data[0].location)
                             life_value.setText(response.data[0].life)
+                            reportprd_value.setText(response.data[0].report_prd)
+                            reptype_value.setText(response.data[0].reptype)
+                            compcode_value.setText(response.data[0].comp_code)
+                            valtype_value.setText(response.data[0].valtype)
+                            account_value.setText(response.data[0].account)
+                            asset_value.setText(response.data[0].asset)
+                            sno_value.setText(response.data[0].sno)
+                            depky_value.setText(response.data[0].depky)
+                            plant_value.setText(response.data[0].plant)
+                            capdate_value.setText(response.data[0].capdate)
+                            odepstart_value.setText(response.data[0].odepstart)
+                            costctr_value.setText(response.data[0].costctr)
                             button_submit.setOnClickListener {
                                 intentStatusSubmit()
                             }
@@ -83,7 +97,7 @@ class SubmitActivity : AppCompatActivity() {
                             snackbar.show()
                             setResultScan()
                             val currentTime: String =
-                                SimpleDateFormat("yyyy/mm/dd HH.mm.ss", Locale.getDefault()).format(
+                                SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(
                                     Date()
                                 )
                             procdate_value.setText(currentTime)
@@ -102,6 +116,7 @@ class SubmitActivity : AppCompatActivity() {
             StatusSubmitActivity::class.java
         )
         intent.putExtra("status", setDataParams())
+        Timber.d(setDataParams())
         startActivity(intent)
         finish()
     }
@@ -111,9 +126,24 @@ class SubmitActivity : AppCompatActivity() {
     }
 
     private fun setDataParams(): String {
-        return sharedPrefManager.loadUsername() + "|" + asset_code_value.text + "|" +
-                procdate_value.text + "|" + description_value.text + "|" +
-                location_value.text + "|" + location_value.text
+        return sharedPrefManager.loadUsername() + "|" +
+                asset_code_value.text + "|" +
+                procdate_value.text + "|" +
+                reportprd_value.text + "|" +
+                reptype_value.text + "|" +
+                compcode_value.text + "|" +
+                valtype_value.text + "|" +
+                account_value.text + "|" +
+                asset_value.text + "|" +
+                sno_value.text + "|" +
+                depky_value.text + "|" +
+                plant_value.text + "|" +
+                capdate_value.text + "|" +
+                odepstart_value.text + "|" +
+                costctr_value.text + "|" +
+                description_value.text + "|" +
+                location_value.text + "|" +
+                life_value.text
     }
 
     private fun dependency() {

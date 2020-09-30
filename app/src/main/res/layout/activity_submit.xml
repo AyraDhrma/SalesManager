@@ -26,7 +26,7 @@
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?actionBarSize"
-                    android:background="@color/colorAccent"
+                    android:background="@color/colorWhiteBackground"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -40,7 +40,7 @@
                     android:layout_marginStart="48dp"
                     android:gravity="center"
                     android:text="@string/submit_stock"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/colorFontPrimary"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -52,9 +52,10 @@
         <androidx.core.widget.NestedScrollView
             android:id="@+id/scroll"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/button_submit"
             app:layout_constraintTop_toBottomOf="@id/toolbar_layout">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -82,8 +83,8 @@
                     android:background="@drawable/background_input"
                     android:hint="0102XXXXXX"
                     android:imeOptions="normal"
-                    android:padding="16dp"
                     android:inputType="text"
+                    android:padding="16dp"
                     android:textCursorDrawable="@drawable/black_cursor"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/asset_code_label"
@@ -107,14 +108,338 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:background="@drawable/background_input"
-                    android:inputType="text"
                     android:hint="YYYY/MM/DD HH.MM.SS"
                     android:imeOptions="normal"
+                    android:inputType="text"
                     android:padding="16dp"
                     android:textCursorDrawable="@drawable/black_cursor"
                     app:layout_constraintEnd_toEndOf="@+id/asset_code_value"
                     app:layout_constraintStart_toStartOf="@+id/asset_code_label"
                     app:layout_constraintTop_toBottomOf="@id/procdate_label" />
+
+                <TextView
+                    android:id="@+id/reportprd_label"
+                    style="@style/DescriptionTitleLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:text="Report Product"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/procdate_value" />
+
+                <EditText
+                    android:id="@+id/reportprd_value"
+                    style="@style/DescriptionLabel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/background_input"
+                    android:hint="YYYY/MM/DD HH.MM.SS"
+                    android:imeOptions="normal"
+                    android:inputType="text"
+                    android:padding="16dp"
+                    android:textCursorDrawable="@drawable/black_cursor"
+                    app:layout_constraintEnd_toEndOf="@+id/asset_code_value"
+                    app:layout_constraintStart_toStartOf="@+id/asset_code_label"
+                    app:layout_constraintTop_toBottomOf="@id/reportprd_label" />
+
+                <TextView
+                    android:id="@+id/reptype_label"
+                    style="@style/DescriptionTitleLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:text="Reptype"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/reportprd_value" />
+
+                <EditText
+                    android:id="@+id/reptype_value"
+                    style="@style/DescriptionLabel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/background_input"
+                    android:hint="Reptype"
+                    android:imeOptions="normal"
+                    android:inputType="text"
+                    android:padding="16dp"
+                    android:textCursorDrawable="@drawable/black_cursor"
+                    app:layout_constraintEnd_toEndOf="@+id/asset_code_value"
+                    app:layout_constraintStart_toStartOf="@+id/asset_code_label"
+                    app:layout_constraintTop_toBottomOf="@id/reptype_label" />
+
+                <TextView
+                    android:id="@+id/compcode_label"
+                    style="@style/DescriptionTitleLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:text="CompCode"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/reptype_value" />
+
+                <EditText
+                    android:id="@+id/compcode_value"
+                    style="@style/DescriptionLabel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/background_input"
+                    android:hint="CompCode"
+                    android:imeOptions="normal"
+                    android:inputType="text"
+                    android:padding="16dp"
+                    android:textCursorDrawable="@drawable/black_cursor"
+                    app:layout_constraintEnd_toEndOf="@+id/asset_code_value"
+                    app:layout_constraintStart_toStartOf="@+id/asset_code_label"
+                    app:layout_constraintTop_toBottomOf="@id/compcode_label" />
+
+                <TextView
+                    android:id="@+id/valtype_label"
+                    style="@style/DescriptionTitleLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:text="ValType"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/compcode_value" />
+
+                <EditText
+                    android:id="@+id/valtype_value"
+                    style="@style/DescriptionLabel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/background_input"
+                    android:hint="ValType"
+                    android:imeOptions="normal"
+                    android:inputType="text"
+                    android:padding="16dp"
+                    android:textCursorDrawable="@drawable/black_cursor"
+                    app:layout_constraintEnd_toEndOf="@+id/asset_code_value"
+                    app:layout_constraintStart_toStartOf="@+id/asset_code_label"
+                    app:layout_constraintTop_toBottomOf="@id/valtype_label" />
+
+                <TextView
+                    android:id="@+id/account_label"
+                    style="@style/DescriptionTitleLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:text="Account"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/valtype_value" />
+
+                <EditText
+                    android:id="@+id/account_value"
+                    style="@style/DescriptionLabel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/background_input"
+                    android:hint="Account"
+                    android:imeOptions="normal"
+                    android:inputType="text"
+                    android:padding="16dp"
+                    android:textCursorDrawable="@drawable/black_cursor"
+                    app:layout_constraintEnd_toEndOf="@+id/asset_code_value"
+                    app:layout_constraintStart_toStartOf="@+id/asset_code_label"
+                    app:layout_constraintTop_toBottomOf="@id/account_label" />
+
+                <TextView
+                    android:id="@+id/asset_label"
+                    style="@style/DescriptionTitleLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:text="Asset"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/account_value" />
+
+                <EditText
+                    android:id="@+id/asset_value"
+                    style="@style/DescriptionLabel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/background_input"
+                    android:hint="Asset"
+                    android:imeOptions="normal"
+                    android:inputType="text"
+                    android:padding="16dp"
+                    android:textCursorDrawable="@drawable/black_cursor"
+                    app:layout_constraintEnd_toEndOf="@+id/asset_code_value"
+                    app:layout_constraintStart_toStartOf="@+id/asset_code_label"
+                    app:layout_constraintTop_toBottomOf="@id/asset_label" />
+
+                <TextView
+                    android:id="@+id/sno_label"
+                    style="@style/DescriptionTitleLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:text="SNo"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/asset_value" />
+
+                <EditText
+                    android:id="@+id/sno_value"
+                    style="@style/DescriptionLabel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/background_input"
+                    android:hint="SNo"
+                    android:imeOptions="normal"
+                    android:inputType="text"
+                    android:padding="16dp"
+                    android:textCursorDrawable="@drawable/black_cursor"
+                    app:layout_constraintEnd_toEndOf="@+id/asset_code_value"
+                    app:layout_constraintStart_toStartOf="@+id/asset_code_label"
+                    app:layout_constraintTop_toBottomOf="@id/sno_label" />
+
+                <TextView
+                    android:id="@+id/depky_label"
+                    style="@style/DescriptionTitleLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:text="Depky"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/sno_value" />
+
+                <EditText
+                    android:id="@+id/depky_value"
+                    style="@style/DescriptionLabel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/background_input"
+                    android:hint="Depky"
+                    android:imeOptions="normal"
+                    android:inputType="text"
+                    android:padding="16dp"
+                    android:textCursorDrawable="@drawable/black_cursor"
+                    app:layout_constraintEnd_toEndOf="@+id/asset_code_value"
+                    app:layout_constraintStart_toStartOf="@+id/asset_code_label"
+                    app:layout_constraintTop_toBottomOf="@id/depky_label" />
+
+                <TextView
+                    android:id="@+id/plant_label"
+                    style="@style/DescriptionTitleLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:text="Plant"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/depky_value" />
+
+                <EditText
+                    android:id="@+id/plant_value"
+                    style="@style/DescriptionLabel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/background_input"
+                    android:hint="Plant"
+                    android:imeOptions="normal"
+                    android:inputType="text"
+                    android:padding="16dp"
+                    android:textCursorDrawable="@drawable/black_cursor"
+                    app:layout_constraintEnd_toEndOf="@+id/asset_code_value"
+                    app:layout_constraintStart_toStartOf="@+id/asset_code_label"
+                    app:layout_constraintTop_toBottomOf="@id/plant_label" />
+
+                <TextView
+                    android:id="@+id/capdate_label"
+                    style="@style/DescriptionTitleLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:text="Capdate"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/plant_value" />
+
+                <EditText
+                    android:id="@+id/capdate_value"
+                    style="@style/DescriptionLabel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/background_input"
+                    android:hint="Capdate"
+                    android:imeOptions="normal"
+                    android:inputType="text"
+                    android:padding="16dp"
+                    android:textCursorDrawable="@drawable/black_cursor"
+                    app:layout_constraintEnd_toEndOf="@+id/asset_code_value"
+                    app:layout_constraintStart_toStartOf="@+id/asset_code_label"
+                    app:layout_constraintTop_toBottomOf="@id/capdate_label" />
+
+                <TextView
+                    android:id="@+id/odepstart_label"
+                    style="@style/DescriptionTitleLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:text="Odepstart"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/capdate_value" />
+
+                <EditText
+                    android:id="@+id/odepstart_value"
+                    style="@style/DescriptionLabel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/background_input"
+                    android:hint="Odepstart"
+                    android:imeOptions="normal"
+                    android:inputType="text"
+                    android:padding="16dp"
+                    android:textCursorDrawable="@drawable/black_cursor"
+                    app:layout_constraintEnd_toEndOf="@+id/asset_code_value"
+                    app:layout_constraintStart_toStartOf="@+id/asset_code_label"
+                    app:layout_constraintTop_toBottomOf="@id/odepstart_label" />
+
+                <TextView
+                    android:id="@+id/costctr_label"
+                    style="@style/DescriptionTitleLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:text="Costctr"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/odepstart_value" />
+
+                <EditText
+                    android:id="@+id/costctr_value"
+                    style="@style/DescriptionLabel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/background_input"
+                    android:hint="Costctr"
+                    android:imeOptions="normal"
+                    android:inputType="text"
+                    android:padding="16dp"
+                    android:textCursorDrawable="@drawable/black_cursor"
+                    app:layout_constraintEnd_toEndOf="@+id/asset_code_value"
+                    app:layout_constraintStart_toStartOf="@+id/asset_code_label"
+                    app:layout_constraintTop_toBottomOf="@id/costctr_label" />
 
                 <TextView
                     android:id="@+id/description_label"
@@ -123,9 +448,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
-                    android:text="Description"
+                    android:text="Assets Name"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/procdate_value" />
+                    app:layout_constraintTop_toBottomOf="@id/costctr_value" />
 
                 <EditText
                     android:id="@+id/description_value"
@@ -135,10 +460,10 @@
                     android:layout_marginTop="4dp"
                     android:background="@drawable/background_input"
                     android:hint="Assets Name"
-                    android:imeOptions="normal"
+                    android:imeOptions="actionNext"
+                    android:inputType="textMultiLine"
+                    android:scrollbars="vertical"
                     android:padding="16dp"
-                    android:inputType="text"
-                    android:maxLines="3"
                     android:textCursorDrawable="@drawable/black_cursor"
                     app:layout_constraintEnd_toEndOf="@+id/procdate_value"
                     app:layout_constraintStart_toStartOf="@+id/asset_code_label"
@@ -164,9 +489,9 @@
                     android:background="@drawable/background_input"
                     android:hint="Location"
                     android:imeOptions="normal"
-                    android:padding="16dp"
                     android:inputType="text"
                     android:maxLines="3"
+                    android:padding="16dp"
                     android:textCursorDrawable="@drawable/black_cursor"
                     app:layout_constraintEnd_toEndOf="@+id/procdate_value"
                     app:layout_constraintStart_toStartOf="@+id/asset_code_label"
@@ -189,13 +514,15 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
+                    android:layout_marginBottom="16dp"
                     android:background="@drawable/background_input"
                     android:hint="Life"
                     android:imeOptions="normal"
-                    android:padding="16dp"
                     android:inputType="text"
                     android:maxLines="3"
+                    android:padding="16dp"
                     android:textCursorDrawable="@drawable/black_cursor"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/procdate_value"
                     app:layout_constraintStart_toStartOf="@+id/asset_code_label"
                     app:layout_constraintTop_toBottomOf="@id/life_label" />

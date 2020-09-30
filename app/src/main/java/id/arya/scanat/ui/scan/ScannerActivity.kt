@@ -2,10 +2,10 @@ package id.arya.scanat.ui.scan
 
 import android.animation.Animator
 import android.content.pm.PackageManager
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import com.journeyapps.barcodescanner.CaptureManager
 import com.journeyapps.barcodescanner.DecoratedBarcodeView
 import id.arya.scanat.R
@@ -62,9 +62,9 @@ class ScannerActivity : AppCompatActivity(), DecoratedBarcodeView.TorchListener 
             switchFlashLight()
         }
 
-        home_back.setOnClickListener {
-            onBackPressed()
-        }
+//        home_back.setOnClickListener {
+//            onBackPressed()
+//        }
     }
 
     override fun onResume() {
@@ -105,14 +105,20 @@ class ScannerActivity : AppCompatActivity(), DecoratedBarcodeView.TorchListener 
 
     override fun onTorchOn() {
         switch_flashlight.setText(R.string.turn_off_flashlight)
-        switch_flashlight.setCompoundDrawablesWithIntrinsicBounds(0,
-            R.drawable.ic_baseline_flash_on, 0, 0)
+        switch_flashlight.setTextColor(resources.getColor(R.color.colorYellow))
+        switch_flashlight.setCompoundDrawablesWithIntrinsicBounds(
+            0,
+            R.drawable.ic_baseline_flash_on, 0, 0
+        )
     }
 
     override fun onTorchOff() {
         switch_flashlight.setText(R.string.turn_on_flashlight)
-        switch_flashlight.setCompoundDrawablesWithIntrinsicBounds(0,
-            R.drawable.ic_baseline_flash_off, 0, 0)
+        switch_flashlight.setTextColor(resources.getColor(R.color.colorWhiteBackground))
+        switch_flashlight.setCompoundDrawablesWithIntrinsicBounds(
+            0,
+            R.drawable.ic_baseline_flash_off, 0, 0
+        )
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
