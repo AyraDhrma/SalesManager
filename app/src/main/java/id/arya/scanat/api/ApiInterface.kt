@@ -1,10 +1,7 @@
 package id.arya.scanat.api
 
 import id.arya.scanat.model.request.RequestParams
-import id.arya.scanat.model.response.CheckDataResponse
-import id.arya.scanat.model.response.LoginResponse
-import id.arya.scanat.model.response.SplashScreenResponse
-import id.arya.scanat.model.response.SubmitResponse
+import id.arya.scanat.model.response.*
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -15,11 +12,23 @@ interface ApiInterface {
     @GET("android_string.json")
     fun getSplashScreen(): Call<SplashScreenResponse>
 
-    @POST("Assets/checkdata")
-    fun hitCheckData(
+    @POST("Project/list_project")
+    fun getListProject(
         @Header("x-api-key") apiKey: String,
         @Body data: RequestParams
-    ): Call<CheckDataResponse>
+    ): Call<ListProjectResponse>
+
+    @POST("Project/list_document")
+    fun getListDocument(
+        @Header("x-api-key") apiKey: String,
+        @Body data: RequestParams
+    ): Call<ListDocumentResponse>
+
+    @POST("Content/list_tipe_document")
+    fun getListTipeDocument(
+        @Header("x-api-key") apiKey: String,
+        @Body data: RequestParams
+    ): Call<ListTipeDocumentResponse>
 
     @POST("Auth/login")
     fun hitLogin(
@@ -27,8 +36,20 @@ interface ApiInterface {
         @Body data: RequestParams
     ): Call<LoginResponse>
 
-    @POST("Assets/insert_assets")
-    fun hitSubmitAsset(
+    @POST("Project/add_document")
+    fun submitDocument(
+        @Header("x-api-key") apiKey: String,
+        @Body data: RequestParams
+    ): Call<SubmitResponse>
+
+    @POST("Project/add_new_activity")
+    fun submitActivity(
+        @Header("x-api-key") apiKey: String,
+        @Body data: RequestParams
+    ): Call<SubmitResponse>
+
+    @POST("Project/update_document")
+    fun updateDocument(
         @Header("x-api-key") apiKey: String,
         @Body data: RequestParams
     ): Call<SubmitResponse>

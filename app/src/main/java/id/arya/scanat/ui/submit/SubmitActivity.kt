@@ -4,21 +4,16 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import id.arya.scanat.R
 import id.arya.scanat.library.SharedPrefManager
-import id.arya.scanat.model.request.RequestParams
 import id.arya.scanat.repository.MainRepository
 import id.arya.scanat.ui.dialog.DialogLoading
 import id.arya.scanat.viewmodel.MainViewModel
 import id.arya.scanat.viewmodelfactory.MainFactory
 import kotlinx.android.synthetic.main.activity_submit.*
 import timber.log.Timber
-import java.text.SimpleDateFormat
-import java.util.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -40,7 +35,7 @@ class SubmitActivity : AppCompatActivity() {
         supportActionBar?.setDisplayShowTitleEnabled(false)
         dependency()
 
-        checkDataFromDatabase()
+//        checkDataFromDatabase()
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -48,67 +43,67 @@ class SubmitActivity : AppCompatActivity() {
         return true
     }
 
-    private fun checkDataFromDatabase() {
-        if (intent.getStringExtra("result") == "manual_submit") {
-            val currentTime: String =
-                SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(
-                    Date()
-                )
-            procdate_value.setText(currentTime)
-            reportprd_value.setText(currentTime)
-            button_submit.setOnClickListener {
-                intentStatusSubmit()
-            }
-        } else {
-            showLoadingDialog()
-            val requestParams = intent.getStringExtra("result")?.let { RequestParams(it) }
-            requestParams?.let {
-                mainViewModel.hitCheckData("f99aecef3d12e02dcbb6260bbdd35189c89e6e73", it)
-                    .observe(this, Observer { response ->
-                        dismissLoadingDialog()
-                        if (response.rc == "0000") {
-                            setResultScan()
-                            procdate_value.setText(response.data[0].proc_date)
-                            description_value.setText(response.data[0].asset_desc)
-                            location_value.setText(response.data[0].location)
-                            life_value.setText(response.data[0].life)
-                            reportprd_value.setText(response.data[0].report_prd)
-                            reptype_value.setText(response.data[0].reptype)
-                            compcode_value.setText(response.data[0].comp_code)
-                            valtype_value.setText(response.data[0].valtype)
-                            account_value.setText(response.data[0].account)
-                            asset_value.setText(response.data[0].asset)
-                            sno_value.setText(response.data[0].sno)
-                            depky_value.setText(response.data[0].depky)
-                            plant_value.setText(response.data[0].plant)
-                            capdate_value.setText(response.data[0].capdate)
-                            odepstart_value.setText(response.data[0].odepstart)
-                            costctr_value.setText(response.data[0].costctr)
-                            button_submit.setOnClickListener {
-                                intentStatusSubmit()
-                            }
-                        } else {
-                            val snackbar = Snackbar.make(
-                                asset_code_value,
-                                response.message + resources.getString(R.string.insert_manual),
-                                Snackbar.LENGTH_LONG
-                            )
-                            snackbar.view.setBackgroundColor(resources.getColor(R.color.colorError))
-                            snackbar.show()
-                            setResultScan()
-                            val currentTime: String =
-                                SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(
-                                    Date()
-                                )
-                            procdate_value.setText(currentTime)
-                            button_submit.setOnClickListener {
-                                intentStatusSubmit()
-                            }
-                        }
-                    })
-            }
-        }
-    }
+//    private fun checkDataFromDatabase() {
+//        if (intent.getStringExtra("result") == "manual_submit") {
+//            val currentTime: String =
+//                SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(
+//                    Date()
+//                )
+//            procdate_value.setText(currentTime)
+//            reportprd_value.setText(currentTime)
+//            button_submit.setOnClickListener {
+//                intentStatusSubmit()
+//            }
+//        } else {
+//            showLoadingDialog()
+//            val requestParams = intent.getStringExtra("result")?.let { RequestParams(it) }
+//            requestParams?.let {
+//                mainViewModel.hitCheckData("f99aecef3d12e02dcbb6260bbdd35189c89e6e73", it)
+//                    .observe(this, Observer { response ->
+//                        dismissLoadingDialog()
+//                        if (response.rc == "0000") {
+//                            setResultScan()
+//                            procdate_value.setText(response.data[0].proc_date)
+//                            description_value.setText(response.data[0].asset_desc)
+//                            location_value.setText(response.data[0].location)
+//                            life_value.setText(response.data[0].life)
+//                            reportprd_value.setText(response.data[0].report_prd)
+//                            reptype_value.setText(response.data[0].reptype)
+//                            compcode_value.setText(response.data[0].comp_code)
+//                            valtype_value.setText(response.data[0].valtype)
+//                            account_value.setText(response.data[0].account)
+//                            asset_value.setText(response.data[0].asset)
+//                            sno_value.setText(response.data[0].sno)
+//                            depky_value.setText(response.data[0].depky)
+//                            plant_value.setText(response.data[0].plant)
+//                            capdate_value.setText(response.data[0].capdate)
+//                            odepstart_value.setText(response.data[0].odepstart)
+//                            costctr_value.setText(response.data[0].costctr)
+//                            button_submit.setOnClickListener {
+//                                intentStatusSubmit()
+//                            }
+//                        } else {
+//                            val snackbar = Snackbar.make(
+//                                asset_code_value,
+//                                response.message + resources.getString(R.string.insert_manual),
+//                                Snackbar.LENGTH_LONG
+//                            )
+//                            snackbar.view.setBackgroundColor(resources.getColor(R.color.colorError))
+//                            snackbar.show()
+//                            setResultScan()
+//                            val currentTime: String =
+//                                SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(
+//                                    Date()
+//                                )
+//                            procdate_value.setText(currentTime)
+//                            button_submit.setOnClickListener {
+//                                intentStatusSubmit()
+//                            }
+//                        }
+//                    })
+//            }
+//        }
+//    }
 
     private fun intentStatusSubmit() {
         val intent = Intent(

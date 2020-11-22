@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Scanner</string>
+    <string name="app_name">SalesForce</string>
     <string name="scan_assets">SCAN ASSETS</string>
     <string name="turn_on_flashlight">Off</string>
     <string name="scan">Scan QR/Barcode</string>
@@ -20,4 +20,30 @@
     <string name="status_submit">Status Submit</string>
     <string name="press_again_to_exit_app">Press again to exit app</string>
     <string name="insert_manual">" Insert Manual"</string>
+    <string name="role">role</string>
+    <string name="project">Task</string>
+    <string name="date">date</string>
+    <string name="project_detail">Project Detil</string>
+    <string name="keterangan">Keterangan :</string>
+    <string name="status">Status :</string>
+    <string name="document">Activity</string>
+    <string name="new_document">New Activity</string>
+    <string name="submit">Submit</string>
+    <string name="activity">Activity</string>
+    <string name="tipe_dokumen">Tipe Dokumen</string>
+    <string name="email_tujuan">Email Tujuan</string>
+    <string name="tanggal_dokumen">Tanggal Dokumen</string>
+    <string name="nomor_dokumen">Nomor Dokumen</string>
+    <string name="pilih_tanggal">Pilih Tanggal</string>
+    <string name="pilih_tipe_dokumen">Pilih Tipe Dokumen</string>
+    <string name="cannot_null">Tidak Boleh Kosong</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <string name="profile">Profile</string>
+    <string name="logout">Logout</string>
+    <string name="request_document">Request Document</string>
+    <string name="tanggal">Tanggal</string>
+    <string name="caption">Caption</string>
+    <string name="requestdocument">Document</string>
+    <string name="add_activity">Add Activity</string>
 </resources>

@@ -39,7 +39,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun dependency() {
-        val url = "http://202.157.186.151/assetmanagementapi/"
+        val url = sharedPrefManager.loadUrl()
         loginFactory = LoginFactory(MainRepository(url))
         loginViewModel = ViewModelProvider(this, loginFactory)[LoginViewModel::class.java]
     }
@@ -73,7 +73,7 @@ class LoginActivity : AppCompatActivity() {
             login_username_input.text.toString() + "|" +
                     login_password_input.text.toString()
         )
-        loginViewModel.hitLoginApi("f99aecef3d12e02dcbb6260bbdd35189c89e6e73", requestParams)
+        loginViewModel.hitLoginApi(sharedPrefManager.loadApiKey(), requestParams)
             .observe(this, Observer { response ->
                 dismissLoadingDialog()
                 if (response.rc == "0000") {

@@ -3,10 +3,7 @@ package id.arya.scanat.repository
 import androidx.lifecycle.MutableLiveData
 import id.arya.scanat.api.ApiService
 import id.arya.scanat.model.request.RequestParams
-import id.arya.scanat.model.response.CheckDataResponse
-import id.arya.scanat.model.response.LoginResponse
-import id.arya.scanat.model.response.SplashScreenResponse
-import id.arya.scanat.model.response.SubmitResponse
+import id.arya.scanat.model.response.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -46,27 +43,115 @@ constructor(url: String) {
         return responseApi
     }
 
-    fun hitCheckData(
+    fun getListProject(
         apiKey: String,
         data: RequestParams
-    ): MutableLiveData<CheckDataResponse> {
-        val responseApi: MutableLiveData<CheckDataResponse> = MutableLiveData()
+    ): MutableLiveData<ListProjectResponse> {
+        val responseApi: MutableLiveData<ListProjectResponse> = MutableLiveData()
 
-        apiService.hitCheckData(apiKey, data)
-            .enqueue(object : Callback<CheckDataResponse> {
-                override fun onFailure(call: Call<CheckDataResponse>, t: Throwable) {
-                    Timber.d(TAG, t.localizedMessage)
-                    responseApi.postValue(null)
+        apiService.getListProject(apiKey, data)
+            .enqueue(object : Callback<ListProjectResponse> {
+                override fun onFailure(call: Call<ListProjectResponse>, t: Throwable) {
+                    val data = arrayListOf<ListProjectResponse.Data>()
+                    val listProjectResponse = ListProjectResponse(
+                        "error", t.localizedMessage,
+                        t.localizedMessage, data
+                    )
+                    responseApi.postValue(listProjectResponse)
                 }
 
                 override fun onResponse(
-                    call: Call<CheckDataResponse>,
-                    response: Response<CheckDataResponse>
+                    call: Call<ListProjectResponse>,
+                    response: Response<ListProjectResponse>
                 ) {
                     if (response.isSuccessful) {
                         responseApi.postValue(response.body())
                         Timber.d(TAG, response.body().toString())
                     } else {
+                        val data = arrayListOf<ListProjectResponse.Data>()
+                        val listProjectResponse = ListProjectResponse(
+                            "error", response.errorBody().toString(),
+                            response.errorBody().toString(), data
+                        )
+                        responseApi.postValue(listProjectResponse)
+                        Timber.d(TAG, response.errorBody().toString())
+                    }
+                }
+
+            })
+        return responseApi
+    }
+
+    fun getListDocument(
+        apiKey: String,
+        data: RequestParams
+    ): MutableLiveData<ListDocumentResponse> {
+        val responseApi: MutableLiveData<ListDocumentResponse> = MutableLiveData()
+
+        apiService.getListDocument(apiKey, data)
+            .enqueue(object : Callback<ListDocumentResponse> {
+                override fun onFailure(call: Call<ListDocumentResponse>, t: Throwable) {
+                    val data = arrayListOf<ListDocumentResponse.Data>()
+                    val listProjectResponse = ListDocumentResponse(
+                        "error", t.localizedMessage,
+                        t.localizedMessage, data
+                    )
+                    responseApi.postValue(listProjectResponse)
+                }
+
+                override fun onResponse(
+                    call: Call<ListDocumentResponse>,
+                    response: Response<ListDocumentResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        responseApi.postValue(response.body())
+                        Timber.d(TAG, response.body().toString())
+                    } else {
+                        val data = arrayListOf<ListDocumentResponse.Data>()
+                        val listProjectResponse = ListDocumentResponse(
+                            "error", response.errorBody().toString(),
+                            response.errorBody().toString(), data
+                        )
+                        responseApi.postValue(listProjectResponse)
+                        Timber.d(TAG, response.errorBody().toString())
+                    }
+                }
+
+            })
+        return responseApi
+    }
+
+    fun getListTipeDocument(
+        apiKey: String,
+        data: RequestParams
+    ): MutableLiveData<ListTipeDocumentResponse> {
+        val responseApi: MutableLiveData<ListTipeDocumentResponse> = MutableLiveData()
+
+        apiService.getListTipeDocument(apiKey, data)
+            .enqueue(object : Callback<ListTipeDocumentResponse> {
+                override fun onFailure(call: Call<ListTipeDocumentResponse>, t: Throwable) {
+                    val data = arrayListOf<ListTipeDocumentResponse.Data>()
+                    val listProjectResponse = ListTipeDocumentResponse(
+                        "error", t.localizedMessage,
+                        t.localizedMessage, data
+                    )
+                    responseApi.postValue(listProjectResponse)
+                }
+
+                override fun onResponse(
+                    call: Call<ListTipeDocumentResponse>,
+                    response: Response<ListTipeDocumentResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        responseApi.postValue(response.body())
+                        Timber.d(TAG, response.body().toString())
+                    } else {
+                        val data = arrayListOf<ListTipeDocumentResponse.Data>()
+                        val listProjectResponse = ListTipeDocumentResponse(
+                            "error", response.errorBody().toString(),
+                            response.errorBody().toString(), data
+                        )
+                        responseApi.postValue(listProjectResponse)
                         Timber.d(TAG, response.errorBody().toString())
                     }
                 }
@@ -85,7 +170,15 @@ constructor(url: String) {
             .enqueue(object : Callback<LoginResponse> {
                 override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                     Timber.d(TAG, t.localizedMessage)
-                    responseApi.postValue(null)
+                    val data = LoginResponse.Data(
+                        "", "", "", "",
+                        "", "", ""
+                    )
+                    val loginResponse = LoginResponse(
+                        "error", t.localizedMessage,
+                        t.localizedMessage, data
+                    )
+                    responseApi.postValue(loginResponse)
                 }
 
                 override fun onResponse(
@@ -96,6 +189,15 @@ constructor(url: String) {
                         responseApi.postValue(response.body())
                         Timber.d(TAG, response.body().toString())
                     } else {
+                        val data = LoginResponse.Data(
+                            "", "", "", "",
+                            "", "", ""
+                        )
+                        val loginResponse = LoginResponse(
+                            "error", response.errorBody().toString(),
+                            response.errorBody().toString(), data
+                        )
+                        responseApi.postValue(loginResponse)
                         Timber.d(TAG, response.errorBody().toString())
                     }
                 }
@@ -104,14 +206,15 @@ constructor(url: String) {
         return responseApi
     }
 
-    fun hitSubmitAsset(apiKey: String, params: RequestParams): MutableLiveData<SubmitResponse> {
+    fun submitDocument(apiKey: String, params: RequestParams): MutableLiveData<SubmitResponse> {
         val responseApi: MutableLiveData<SubmitResponse> = MutableLiveData()
 
-        apiService.hitSubmitAsset(apiKey, params)
+        apiService.submitDocument(apiKey, params)
             .enqueue(object : Callback<SubmitResponse> {
                 override fun onFailure(call: Call<SubmitResponse>, t: Throwable) {
                     Timber.d(TAG, t.localizedMessage)
-                    responseApi.postValue(null)
+                    val submitResponse = SubmitResponse("", "", t.localizedMessage)
+                    responseApi.postValue(submitResponse)
                 }
 
                 override fun onResponse(
@@ -122,7 +225,8 @@ constructor(url: String) {
                         responseApi.postValue(response.body())
                         Timber.d(TAG, response.body().toString())
                     } else {
-                        Timber.d(TAG, response.errorBody().toString())
+                        val submitResponse = SubmitResponse("", "", response.errorBody().toString())
+                        responseApi.postValue(submitResponse)
                     }
                 }
 
@@ -130,53 +234,61 @@ constructor(url: String) {
         return responseApi
     }
 
-//
-//    fun hitMenu(apiKey: String, data: RequestParams): MutableLiveData<MenuResponse> {
-//        val responseApi: MutableLiveData<MenuResponse> = MutableLiveData()
-//
-//        apiService.hitApiMenu(apiKey, data).enqueue(object : Callback<MenuResponse> {
-//            override fun onFailure(call: Call<MenuResponse>, t: Throwable) {
-//                Log.d(TAG, t.localizedMessage)
-//                responseApi.postValue(null)
-//            }
-//
-//            override fun onResponse(
-//                call: Call<MenuResponse>,
-//                response: Response<MenuResponse>
-//            ) {
-//                if (response.isSuccessful) {
-//                    responseApi.postValue(response.body())
-//                    Log.d(TAG, response.body().toString())
-//                } else {
-//                    Log.d(TAG, response.errorBody().toString())
-//                }
-//            }
-//
-//        })
-//        return responseApi
-//    }
+    fun submitActivity(apiKey: String, params: RequestParams): MutableLiveData<SubmitResponse> {
+        val responseApi: MutableLiveData<SubmitResponse> = MutableLiveData()
 
-//    fun hitApiProductList(key: String, data: RequestParams): MutableLiveData<MenuResponse> {
-//        val responseApi: MutableLiveData<MenuResponse> = MutableLiveData()
-//
-//        apiService.hitApiProductList(key, data).enqueue(object : Callback<MenuResponse> {
-//            override fun onFailure(call: Call<MenuResponse>, t: Throwable) {
-//                Log.d(TAG, t.localizedMessage)
-//                responseApi.postValue(null)
-//            }
-//
-//            override fun onResponse(call: Call<MenuResponse>, response: Response<MenuResponse>) {
-//                if (response.isSuccessful) {
-//                    responseApi.postValue(response.body())
-//                    Log.d(TAG, response.body().toString())
-//                } else {
-//                    Log.d(TAG, response.errorBody().toString())
-//                }
-//            }
-//        })
-//
-//        return responseApi
-//    }
+        apiService.submitActivity(apiKey, params)
+            .enqueue(object : Callback<SubmitResponse> {
+                override fun onFailure(call: Call<SubmitResponse>, t: Throwable) {
+                    Timber.d(TAG, t.localizedMessage)
+                    val submitResponse = SubmitResponse("", "", t.localizedMessage)
+                    responseApi.postValue(submitResponse)
+                }
+
+                override fun onResponse(
+                    call: Call<SubmitResponse>,
+                    response: Response<SubmitResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        responseApi.postValue(response.body())
+                        Timber.d(TAG, response.body().toString())
+                    } else {
+                        val submitResponse = SubmitResponse("", "", response.errorBody().toString())
+                        responseApi.postValue(submitResponse)
+                    }
+                }
+
+            })
+        return responseApi
+    }
+
+    fun updateDocument(apiKey: String, params: RequestParams): MutableLiveData<SubmitResponse> {
+        val responseApi: MutableLiveData<SubmitResponse> = MutableLiveData()
+
+        apiService.updateDocument(apiKey, params)
+            .enqueue(object : Callback<SubmitResponse> {
+                override fun onFailure(call: Call<SubmitResponse>, t: Throwable) {
+                    Timber.d(TAG, t.localizedMessage)
+                    val submitResponse = SubmitResponse("", "", t.localizedMessage)
+                    responseApi.postValue(submitResponse)
+                }
+
+                override fun onResponse(
+                    call: Call<SubmitResponse>,
+                    response: Response<SubmitResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        responseApi.postValue(response.body())
+                        Timber.d(TAG, response.body().toString())
+                    } else {
+                        val submitResponse = SubmitResponse("", "", response.errorBody().toString())
+                        responseApi.postValue(submitResponse)
+                    }
+                }
+
+            })
+        return responseApi
+    }
 
 }
 

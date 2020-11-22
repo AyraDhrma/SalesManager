@@ -1,10 +1,13 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
     </style>
 
     <style name="TitleLabel">
@@ -14,7 +17,7 @@
     </style>
 
     <style name="SubTitleLabel">
-        <item name="android:fontFamily">@font/rubik_bold</item>
+        <item name="android:fontFamily">@font/rubik_medium</item>
         <item name="android:textSize">24sp</item>
         <item name="android:textColor">@color/colorFontPrimary</item>
     </style>

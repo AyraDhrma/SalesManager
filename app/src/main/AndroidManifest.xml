@@ -4,18 +4,32 @@
     package="id.arya.scanat">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission. ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".BaseApplication"
-        android:icon="@mipmap/ic_launcher_mercy"
+        android:icon="@mipmap/ic_launcher_salesforce"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_mercy_round"
+        android:roundIcon="@mipmap/ic_launcher_salesforce_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup,UnusedAttribute">
+        <activity android:name=".ui.activity.SalesActivity"></activity>
+        <activity android:name=".ui.profile.ProfileActivity" />
+        <activity
+            android:name=".ui.document.EditDocument"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".ui.project.ProjectDetail"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".ui.submit.StatusSubmitActivity"
             android:screenOrientation="portrait"
@@ -37,11 +51,18 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.scan.ScannerActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".ui.main.MainActivity"
             android:screenOrientation="portrait" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="id.arya.scanat"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
     </application>
 
 </manifest>

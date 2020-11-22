@@ -4,63 +4,112 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorFontWhite"
     tools:context=".ui.main.MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/title_label_main"
-            style="@style/TitleLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:text="@string/halo"
-            app:layout_constraintLeft_toLeftOf="parent"
+        <ImageView
+            android:id="@+id/logo_main"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_margin="8dp"
+            android:src="@drawable/logo_m"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/username_label_main"
-            style="@style/SubTitleLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:text="@string/app_name"
-            app:layout_constraintBottom_toBottomOf="@+id/title_label_main"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/title_label_main" />
-
-        <Button
-            android:id="@+id/button_manual_submit"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/profile_div_main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:background="@drawable/background_button_black"
-            android:fontFamily="@font/rubik_bold"
-            android:padding="16dp"
-            android:text="Add Manual Asset"
-            android:textAllCaps="false"
-            android:textColor="@color/colorAccent"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/username_label_main" />
+            app:cardCornerRadius="8dp"
+            app:layout_constraintTop_toBottomOf="@id/logo_main">
 
-        <com.robertlevonyan.views.customfloatingactionbutton.FloatingActionButton
-            android:id="@+id/button_scan_main"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/username_label_main"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/rubik_medium"
+                    android:padding="2dp"
+                    android:text="@string/username"
+                    android:textColor="@color/colorFontPrimary"
+                    app:layout_constraintEnd_toStartOf="@+id/profile_img_main"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/profile_img_main" />
+
+                <ImageView
+                    android:id="@+id/profile_img_main"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/ic_profile"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/role_label_main"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/background_role"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/rubik_medium"
+                    android:padding="2dp"
+                    android:text="@string/role"
+                    android:textColor="@color/colorFontWhite"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/profile_img_main"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/username_label_main" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/project_title_main"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:fontFamily="@font/rubik_medium"
+            android:layout_margin="16dp"
+            android:text="@string/project"
+            android:textColor="@color/colorFontPrimary"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profile_div_main" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_list_project_main"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:overScrollMode="never"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/project_title_main" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|right"
             android:layout_margin="16dp"
-            android:contentDescription="@string/app_name"
-            app:borderWidth="0dp"
-            app:fabColor="@color/colorPrimary"
-            app:fabCustomSize="64dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
-            app:fabIcon="@drawable/qr_code_black" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/project_title_main" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
