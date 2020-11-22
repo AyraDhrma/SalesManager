@@ -1,5 +1,6 @@
 package id.arya.scanat.adapter
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +12,6 @@ import id.arya.scanat.R
 import id.arya.scanat.model.response.ListActivityResponse
 import kotlinx.android.synthetic.main.item_list_activity.view.*
 
-
 class ListActivityAdapter(
     val activity: Activity,
     val listActivity: ArrayList<ListActivityResponse.Data>
@@ -22,13 +22,18 @@ class ListActivityAdapter(
         return listActivity.size
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.itemView.apply {
-            Picasso.get()
-                .load(listActivity[position].ls_gambar)
-                .placeholder(R.drawable.background_role)
-                .error(R.drawable.background_role)
-                .into(image_activity)
+            if (listActivity[position].ls_gambar == null) {
+                image_activity.setImageDrawable(context.resources.getDrawable(R.drawable.no_photo))
+            } else {
+                Picasso.get()
+                    .load(listActivity[position].ls_gambar)
+                    .placeholder(R.drawable.background_role)
+                    .error(R.drawable.background_role)
+                    .into(image_activity)
+            }
             val builder: Zoomy.Builder = Zoomy.Builder(activity).target(image_activity)
             builder.register()
             caption.text = listActivity[position].ls_keterangan

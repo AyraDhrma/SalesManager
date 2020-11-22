@@ -160,6 +160,45 @@ constructor(url: String) {
         return responseApi
     }
 
+    fun getListProduct(
+        apiKey: String,
+        data: RequestParams
+    ): MutableLiveData<ListProductResponse> {
+        val responseApi: MutableLiveData<ListProductResponse> = MutableLiveData()
+
+        apiService.getListProduct(apiKey, data)
+            .enqueue(object : Callback<ListProductResponse> {
+                override fun onFailure(call: Call<ListProductResponse>, t: Throwable) {
+                    val data = arrayListOf<ListProductResponse.Data>()
+                    val listProjectResponse = ListProductResponse(
+                        "error", t.localizedMessage,
+                        t.localizedMessage, data
+                    )
+                    responseApi.postValue(listProjectResponse)
+                }
+
+                override fun onResponse(
+                    call: Call<ListProductResponse>,
+                    response: Response<ListProductResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        responseApi.postValue(response.body())
+                        Timber.d(TAG, response.body().toString())
+                    } else {
+                        val data = arrayListOf<ListProductResponse.Data>()
+                        val listProjectResponse = ListProductResponse(
+                            "error", response.errorBody().toString(),
+                            response.errorBody().toString(), data
+                        )
+                        responseApi.postValue(listProjectResponse)
+                        Timber.d(TAG, response.errorBody().toString())
+                    }
+                }
+
+            })
+        return responseApi
+    }
+
     fun getListTipeDocument(
         apiKey: String,
         data: RequestParams

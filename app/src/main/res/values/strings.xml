@@ -47,4 +47,16 @@
     <string name="requestdocument">Req. Document</string>
     <string name="add_activity">Add Activity</string>
     <string name="list_document">List Document</string>
+    <string name="turn_on">Turn On</string>
+    <string name="list_product">List Product</string>
+    <string name="nama">Nama :</string>
+    <string name="harga">Harga :</string>
+    <string name="dummy">Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...</string>
+    <string name="jenis">Jenis :</string>
+    <string name="tipe">Tipe :</string>
+    <string name="kapasitas">Kapasitas :</string>
+    <string name="jumlah">Jumlah :</string>
+    <string name="satuan">Satuan :</string>
+    <string name="berat">Berat :</string>
+    <string name="realise">Realise</string>
 </resources>

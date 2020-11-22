@@ -1,6 +1,7 @@
 package id.arya.scanat.ui.main
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -26,6 +27,7 @@ import id.arya.scanat.model.response.ListProjectResponse
 import id.arya.scanat.repository.MainRepository
 import id.arya.scanat.ui.dialog.DialogLoading
 import id.arya.scanat.ui.login.LoginActivity
+import id.arya.scanat.ui.product.ListProductActivity
 import id.arya.scanat.ui.profile.ProfileActivity
 import id.arya.scanat.ui.project.ProjectDetail
 import id.arya.scanat.viewmodel.MainViewModel
@@ -96,6 +98,9 @@ class MainActivity : AppCompatActivity() {
         profile_img_main.setOnClickListener {
             startActivity(Intent(this@MainActivity, ProfileActivity::class.java))
         }
+        product_img_main.setOnClickListener {
+            startActivity(Intent(this@MainActivity, ListProductActivity::class.java))
+        }
     }
 
     private fun dependency() {
@@ -115,6 +120,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun getListProject() {
         visibleLoading()
         val salesCode = sharedPrefManager.loadSalesCode()
@@ -124,6 +130,11 @@ class MainActivity : AppCompatActivity() {
                 hideLoading()
                 visibleListProject()
                 if (response.rc == "0000") {
+                    target_title_main.text = "Target ${response.data[0].target_year}"
+                    target.progress = response.data[0].target_jumlah.toInt()
+                    target.finishedColor = resources.getColor(R.color.colorPrimary)
+                    realise.progress = response.data[0].target_realis.toInt()
+                    realise.finishedColor = resources.getColor(R.color.colorPrimary)
                     listProjectAdapter = ListProjectAdapter(response)
                     rv_list_project_main.setHasFixedSize(true)
                     rv_list_project_main.layoutManager = LinearLayoutManager(this)

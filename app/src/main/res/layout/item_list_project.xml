@@ -59,7 +59,7 @@
 
     <TextView
         android:id="@+id/project_status_list"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:layout_marginBottom="16dp"
@@ -71,6 +71,7 @@
         android:textColor="@color/colorWhiteBackground"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/project_customer_list"
         app:layout_constraintStart_toStartOf="@+id/project_customer_list"
         app:layout_constraintTop_toBottomOf="@+id/project_customer_list" />
 

@@ -36,6 +36,13 @@ class MainViewModel(private val repository: MainRepository): ViewModel() {
         return repository.getListActivity(apiKey, params)
     }
 
+    fun getListProduct(
+        apiKey: String,
+        params: RequestParams
+    ): MutableLiveData<ListProductResponse> {
+        return repository.getListProduct(apiKey, params)
+    }
+
     fun submitDocument(apiKey: String, params: RequestParams): MutableLiveData<SubmitResponse> {
         return repository.submitDocument(apiKey, params)
     }

@@ -30,6 +30,12 @@ interface ApiInterface {
         @Body data: RequestParams
     ): Call<ListActivityResponse>
 
+    @POST("Product/list_produk")
+    fun getListProduct(
+        @Header("x-api-key") apiKey: String,
+        @Body data: RequestParams
+    ): Call<ListProductResponse>
+
     @POST("Content/list_tipe_document")
     fun getListTipeDocument(
         @Header("x-api-key") apiKey: String,

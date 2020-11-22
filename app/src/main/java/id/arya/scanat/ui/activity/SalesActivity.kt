@@ -3,10 +3,12 @@ package id.arya.scanat.ui.activity
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.location.LocationManager
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
@@ -28,6 +30,7 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import dagger.hilt.android.AndroidEntryPoint
 import es.dmoral.toasty.Toasty
 import id.arya.scanat.R
+import id.arya.scanat.costumeui.DialogFragmentGps
 import id.arya.scanat.library.SharedPrefManager
 import id.arya.scanat.model.request.RequestParams
 import id.arya.scanat.repository.MainRepository
@@ -45,9 +48,10 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class SalesActivity : AppCompatActivity() {
 
+    private val GPS_ENABLE_REQUEST = 1010
     private var photoURI: Uri? = null
-    private var latitude: String? = null
-    private var longitude: String? = null
+    private var latitude: String = ""
+    private var longitude: String = ""
     private val REQUEST_IMAGE_CAPTURE = 1009
 
     @Inject
@@ -55,6 +59,7 @@ class SalesActivity : AppCompatActivity() {
     private lateinit var mainViewModel: MainViewModel
     private lateinit var mainFactory: MainFactory
     private val loadingDialog = DialogLoading()
+    private var dialogFragmentGps = DialogFragmentGps()
     private lateinit var bitmap: Bitmap
     private var photo: String = ""
     lateinit var currentPhotoPath: String
@@ -78,6 +83,35 @@ class SalesActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         getLocation()
+        checkGpsOn()
+    }
+
+    private fun checkGpsOn(): Boolean {
+        var isGpsOn = false
+        val manager: LocationManager =
+            this.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+
+        if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            dialogFragmentGps = DialogFragmentGps()
+            dialogFragmentGps.show(supportFragmentManager, "GPS")
+            isGpsOn = false
+        } else {
+            isGpsOn = true
+        }
+        return isGpsOn
+    }
+
+    private fun validate(): Boolean {
+        var isExist = false
+
+        if (latitude == "" || longitude == "") {
+            isExist = checkGpsOn()
+        } else if (keterangan_dokumen_activity.text.toString() == "") {
+            keterangan_dokumen_activity.error = resources.getString(R.string.cannot_null)
+        } else {
+            isExist = true
+        }
+        return isExist
     }
 
     private fun getLocation() {
@@ -113,7 +147,7 @@ class SalesActivity : AppCompatActivity() {
                                 Toasty.success(
                                     this@SalesActivity, "All Permission Granted",
                                     Toast.LENGTH_SHORT, true
-                                ).show();
+                                ).show()
                             }
                         }
                     }
@@ -162,35 +196,38 @@ class SalesActivity : AppCompatActivity() {
         }
 
         add_activity.setOnClickListener {
-            val projectCode = intent.getStringExtra("project_code")
-            val caption = keterangan_dokumen_activity.text.toString()
-            val slcode = sharedPrefManager.loadSalesCode()
-            val customer = intent.getStringExtra("customer")
+            if (validate()) {
+                val projectCode = intent.getStringExtra("project_code")
+                val caption = keterangan_dokumen_activity.text.toString()
+                val slcode = sharedPrefManager.loadSalesCode()
+                val customer = intent.getStringExtra("customer")
 
-            val requestParams = RequestParams(
-                "" +
-                        "$slcode|$customer|$projectCode|||$photo|$latitude#$longitude|$caption" +
-                        ""
-            )
-            mainViewModel.submitActivity(sharedPrefManager.loadApiKey(), requestParams)
-                .observe(this, Observer { res ->
-                    if (res.rc == "0000") {
-                        Toasty.success(
-                            this@SalesActivity, res.message,
-                            Toast.LENGTH_SHORT, true
-                        ).show();
-                        finish()
-                    } else {
-                        val snackbar = Snackbar.make(
-                            keterangan_dokumen_activity,
-                            res.message,
-                            Snackbar.LENGTH_SHORT
-                        )
-                        snackbar.view.setBackgroundColor(resources.getColor(R.color.colorError))
-                        snackbar.show()
-                    }
-                })
+                val requestParams = RequestParams(
+                    "" +
+                            "$slcode|$customer|$projectCode|||$photo|$latitude#$longitude|$caption" +
+                            ""
+                )
+                mainViewModel.submitActivity(sharedPrefManager.loadApiKey(), requestParams)
+                    .observe(this, Observer { res ->
+                        if (res.rc == "0000") {
+                            Toasty.success(
+                                this@SalesActivity, res.message,
+                                Toast.LENGTH_SHORT, true
+                            ).show()
+                            finish()
+                        } else {
+                            val snackbar = Snackbar.make(
+                                keterangan_dokumen_activity,
+                                res.message,
+                                Snackbar.LENGTH_SHORT
+                            )
+                            snackbar.view.setBackgroundColor(resources.getColor(R.color.colorError))
+                            snackbar.show()
+                        }
+                    })
+            }
         }
+
     }
 
     @Throws(IOException::class)

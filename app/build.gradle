@@ -87,15 +87,16 @@ dependencies {
     implementation "com.jakewharton.timber:timber:$timber_version"
 
     // Lottie
-    implementation 'com.airbnb.android:lottie:3.4.0'
+    implementation 'com.airbnb.android:lottie:3.4.4'
 
     // UI
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
     implementation 'com.intuit.ssp:ssp-android:1.0.6'
     implementation 'com.github.GrenderG:Toasty:1.5.0'
-    implementation 'com.github.chrisbanes:PhotoView:2.0.0'
     implementation 'com.karumi:dexter:6.2.2'
     implementation 'com.ablanco.zoomy:zoomy:1.1.0'
+    implementation 'com.shreyaspatil:MaterialDialog:2.1'
+    implementation 'com.github.lzyzsd:circleprogress:1.2.1'
 
 
 }

@@ -13,9 +13,9 @@
 
         <ImageView
             android:id="@+id/logo_main"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
-            android:layout_margin="8dp"
+            android:layout_width="@dimen/_56sdp"
+            android:layout_height="@dimen/_56sdp"
+            android:layout_margin="@dimen/_8sdp"
             android:src="@drawable/logo_m"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -25,8 +25,8 @@
             android:id="@+id/profile_div_main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            app:cardCornerRadius="8dp"
+            android:layout_margin="@dimen/_8sdp"
+            app:cardCornerRadius="@dimen/_8sdp"
             app:layout_constraintTop_toBottomOf="@id/logo_main">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -37,38 +37,48 @@
                     android:id="@+id/username_label_main"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="@dimen/_8sdp"
                     android:ellipsize="end"
                     android:fontFamily="@font/rubik_medium"
-                    android:padding="2dp"
+                    android:padding="@dimen/_2sdp"
                     android:text="@string/username"
                     android:textColor="@color/colorFontPrimary"
-                    app:layout_constraintEnd_toStartOf="@+id/profile_img_main"
+                    app:layout_constraintEnd_toStartOf="@+id/product_img_main"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/profile_img_main" />
 
                 <ImageView
                     android:id="@+id/profile_img_main"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_margin="10dp"
+                    android:layout_width="@dimen/_32sdp"
+                    android:layout_height="@dimen/_32sdp"
+                    android:layout_margin="@dimen/_10sdp"
                     android:src="@drawable/ic_profile"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <ImageView
+                    android:id="@+id/product_img_main"
+                    android:layout_width="@dimen/_32sdp"
+                    android:layout_height="@dimen/_32sdp"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:src="@drawable/ic_product"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_img_main"
+                    app:layout_constraintEnd_toStartOf="@id/profile_img_main"
+                    app:layout_constraintTop_toTopOf="@id/profile_img_main" />
+
                 <TextView
                     android:id="@+id/role_label_main"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="@dimen/_8sdp"
                     android:background="@drawable/background_role"
                     android:ellipsize="end"
                     android:fontFamily="@font/rubik_medium"
-                    android:padding="2dp"
+                    android:padding="@dimen/_2sdp"
                     android:text="@string/role"
                     android:textColor="@color/colorFontWhite"
-                    android:textSize="12sp"
+                    android:textSize="@dimen/_11ssp"
                     app:layout_constraintBottom_toBottomOf="@+id/profile_img_main"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/username_label_main" />
@@ -77,24 +87,68 @@
 
         </androidx.cardview.widget.CardView>
 
+        <com.github.lzyzsd.circleprogress.CircleProgress
+            android:id="@+id/realise"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_margin="@dimen/_8sdp"
+            app:layout_constraintStart_toEndOf="@+id/realise_title_main"
+            app:layout_constraintTop_toBottomOf="@+id/profile_div_main" />
+
+        <com.github.lzyzsd.circleprogress.CircleProgress
+            android:id="@+id/target"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_marginStart="@dimen/_8sdp"
+            app:layout_constraintStart_toEndOf="@+id/target_title_main"
+            app:layout_constraintTop_toTopOf="@+id/realise" />
+
+        <TextView
+            android:id="@+id/realise_title_main"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_8sdp"
+            android:ellipsize="end"
+            android:fontFamily="@font/rubik_medium"
+            android:text="@string/realise"
+            android:textColor="@color/colorFontPrimary"
+            android:textSize="@dimen/_13ssp"
+            app:layout_constraintBottom_toBottomOf="@+id/realise"
+            app:layout_constraintStart_toEndOf="@+id/target"
+            app:layout_constraintTop_toTopOf="@+id/realise" />
+
+        <TextView
+            android:id="@+id/target_title_main"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_8sdp"
+            android:ellipsize="end"
+            android:fontFamily="@font/rubik_medium"
+            android:text="@string/realise"
+            android:textColor="@color/colorFontPrimary"
+            android:textSize="@dimen/_13ssp"
+            app:layout_constraintBottom_toBottomOf="@+id/realise"
+            app:layout_constraintStart_toStartOf="@+id/profile_div_main"
+            app:layout_constraintTop_toTopOf="@+id/realise" />
+
         <TextView
             android:id="@+id/project_title_main"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_8sdp"
             android:ellipsize="end"
             android:fontFamily="@font/rubik_medium"
-            android:layout_margin="16dp"
             android:text="@string/project"
             android:textColor="@color/colorFontPrimary"
-            android:textSize="24sp"
+            android:textSize="@dimen/_24ssp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profile_div_main" />
+            app:layout_constraintTop_toBottomOf="@+id/realise" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_list_project_main"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="@dimen/_4sdp"
             android:overScrollMode="never"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
@@ -105,7 +159,7 @@
             android:id="@+id/progress_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_margin="@dimen/_16sdp"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

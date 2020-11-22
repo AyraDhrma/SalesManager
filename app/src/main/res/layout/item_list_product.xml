@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/_8sdp">
+
+    <View
+        android:id="@+id/status_done"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#80FFFFFF"
+        android:elevation="12dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/cardView"
+        app:layout_constraintEnd_toEndOf="@+id/cardView"
+        app:layout_constraintStart_toStartOf="@+id/cardView"
+        app:layout_constraintTop_toTopOf="@+id/cardView" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/colorWhiteBackground"
+        app:cardCornerRadius="@dimen/_6sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <View
+                android:id="@+id/line"
+                android:layout_width="@dimen/_6sdp"
+                android:layout_height="0dp"
+                android:background="@color/colorPrimary"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/nama_product_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_4sdp"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:ellipsize="end"
+                android:fontFamily="@font/rubik_medium"
+                android:text="@string/nama"
+                android:textColor="@color/colorFontSecondary"
+                android:textSize="@dimen/_13ssp"
+                app:layout_constraintStart_toEndOf="@+id/line"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/nama_product"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_4sdp"
+                android:ellipsize="end"
+                android:fontFamily="@font/rubik_medium"
+                android:textColor="@color/colorFontPrimary"
+                android:textSize="@dimen/_13ssp"
+                app:layout_constraintBottom_toBottomOf="@id/nama_product_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/nama_product_title"
+                app:layout_constraintTop_toTopOf="@id/nama_product_title"
+                tools:text="Nama Produk" />
+
+            <TextView
+                android:id="@+id/harga_product_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_4sdp"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:ellipsize="end"
+                android:fontFamily="@font/rubik_medium"
+                android:text="@string/harga"
+                android:textColor="@color/colorFontSecondary"
+                android:textSize="@dimen/_13ssp"
+                app:layout_constraintStart_toEndOf="@+id/line"
+                app:layout_constraintTop_toBottomOf="@id/nama_product_title" />
+
+            <TextView
+                android:id="@+id/harga_product"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_4sdp"
+                android:ellipsize="end"
+                android:fontFamily="@font/rubik_medium"
+                android:textColor="@color/colorFontPrimary"
+                android:textSize="@dimen/_13ssp"
+                app:layout_constraintBottom_toBottomOf="@id/harga_product_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/harga_product_title"
+                app:layout_constraintTop_toTopOf="@id/harga_product_title"
+                tools:text="Rp.130.000,-" />
+
+            <TextView
+                android:id="@+id/jenis_product_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_4sdp"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:ellipsize="end"
+                android:fontFamily="@font/rubik_medium"
+                android:text="@string/jenis"
+                android:textColor="@color/colorFontSecondary"
+                android:textSize="@dimen/_13ssp"
+                app:layout_constraintStart_toEndOf="@+id/line"
+                app:layout_constraintTop_toBottomOf="@id/harga_product_title" />
+
+            <TextView
+                android:id="@+id/jenis_product"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_4sdp"
+                android:ellipsize="end"
+                android:fontFamily="@font/rubik_medium"
+                android:textColor="@color/colorFontPrimary"
+                android:textSize="@dimen/_13ssp"
+                app:layout_constraintBottom_toBottomOf="@id/jenis_product_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/jenis_product_title"
+                app:layout_constraintTop_toTopOf="@id/jenis_product_title"
+                tools:text="Jenis" />
+
+            <TextView
+                android:id="@+id/tipe_product_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_4sdp"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:ellipsize="end"
+                android:fontFamily="@font/rubik_medium"
+                android:text="@string/tipe"
+                android:textColor="@color/colorFontSecondary"
+                android:textSize="@dimen/_13ssp"
+                app:layout_constraintStart_toEndOf="@+id/line"
+                app:layout_constraintTop_toBottomOf="@id/jenis_product_title" />
+
+            <TextView
+                android:id="@+id/tipe_product"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_4sdp"
+                android:ellipsize="end"
+                android:fontFamily="@font/rubik_medium"
+                android:textColor="@color/colorFontPrimary"
+                android:textSize="@dimen/_13ssp"
+                app:layout_constraintBottom_toBottomOf="@id/tipe_product_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tipe_product_title"
+                app:layout_constraintTop_toTopOf="@id/tipe_product_title"
+                tools:text="Tipe" />
+
+            <TextView
+                android:id="@+id/kapasitas_product_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_4sdp"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:ellipsize="end"
+                android:fontFamily="@font/rubik_medium"
+                android:text="@string/kapasitas"
+                android:textColor="@color/colorFontSecondary"
+                android:textSize="@dimen/_13ssp"
+                app:layout_constraintStart_toEndOf="@+id/line"
+                app:layout_constraintTop_toBottomOf="@id/tipe_product_title" />
+
+            <TextView
+                android:id="@+id/kapasitas_product"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_4sdp"
+                android:ellipsize="end"
+                android:fontFamily="@font/rubik_medium"
+                android:textColor="@color/colorFontPrimary"
+                android:textSize="@dimen/_13ssp"
+                app:layout_constraintBottom_toBottomOf="@id/kapasitas_product_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/kapasitas_product_title"
+                app:layout_constraintTop_toTopOf="@id/kapasitas_product_title"
+                tools:text="Tipe" />
+
+            <TextView
+                android:id="@+id/jumlah_product_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_4sdp"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:ellipsize="end"
+                android:fontFamily="@font/rubik_medium"
+                android:text="@string/jumlah"
+                android:textColor="@color/colorFontSecondary"
+                android:textSize="@dimen/_13ssp"
+                app:layout_constraintStart_toEndOf="@+id/line"
+                app:layout_constraintTop_toBottomOf="@id/kapasitas_product_title" />
+
+            <TextView
+                android:id="@+id/jumlah_product"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_4sdp"
+                android:ellipsize="end"
+                android:fontFamily="@font/rubik_medium"
+                android:textColor="@color/colorFontPrimary"
+                android:textSize="@dimen/_13ssp"
+                app:layout_constraintBottom_toBottomOf="@id/jumlah_product_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/jumlah_product_title"
+                app:layout_constraintTop_toTopOf="@id/jumlah_product_title"
+                tools:text="Tipe" />
+
+            <TextView
+                android:id="@+id/satuan_product_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_4sdp"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:ellipsize="end"
+                android:fontFamily="@font/rubik_medium"
+                android:text="@string/satuan"
+                android:textColor="@color/colorFontSecondary"
+                android:textSize="@dimen/_13ssp"
+                app:layout_constraintStart_toEndOf="@+id/line"
+                app:layout_constraintTop_toBottomOf="@id/jumlah_product_title" />
+
+            <TextView
+                android:id="@+id/satuan_product"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_4sdp"
+                android:ellipsize="end"
+                android:fontFamily="@font/rubik_medium"
+                android:textColor="@color/colorFontPrimary"
+                android:textSize="@dimen/_13ssp"
+                app:layout_constraintBottom_toBottomOf="@id/satuan_product_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/satuan_product_title"
+                app:layout_constraintTop_toTopOf="@id/satuan_product_title"
+                tools:text="Tipe" />
+
+            <TextView
+                android:id="@+id/berat_product_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_4sdp"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:layout_marginBottom="@dimen/_8sdp"
+                android:ellipsize="end"
+                android:fontFamily="@font/rubik_medium"
+                android:text="@string/berat"
+                android:textColor="@color/colorFontSecondary"
+                android:textSize="@dimen/_13ssp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/line"
+                app:layout_constraintTop_toBottomOf="@id/satuan_product_title" />
+
+            <TextView
+                android:id="@+id/berat_product"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_4sdp"
+                android:ellipsize="end"
+                android:fontFamily="@font/rubik_medium"
+                android:textColor="@color/colorFontPrimary"
+                android:textSize="@dimen/_13ssp"
+                app:layout_constraintBottom_toBottomOf="@id/berat_product_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/berat_product_title"
+                app:layout_constraintTop_toTopOf="@id/berat_product_title"
+                tools:text="Tipe" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
