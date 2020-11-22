@@ -3,10 +3,7 @@ package id.arya.scanat.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import id.arya.scanat.model.request.RequestParams
-import id.arya.scanat.model.response.ListDocumentResponse
-import id.arya.scanat.model.response.ListProjectResponse
-import id.arya.scanat.model.response.ListTipeDocumentResponse
-import id.arya.scanat.model.response.SubmitResponse
+import id.arya.scanat.model.response.*
 import id.arya.scanat.repository.MainRepository
 
 class MainViewModel(private val repository: MainRepository): ViewModel() {
@@ -30,6 +27,13 @@ class MainViewModel(private val repository: MainRepository): ViewModel() {
         params: RequestParams
     ): MutableLiveData<ListTipeDocumentResponse> {
         return repository.getListTipeDocument(apiKey, params)
+    }
+
+    fun getListActivity(
+        apiKey: String,
+        params: RequestParams
+    ): MutableLiveData<ListActivityResponse> {
+        return repository.getListActivity(apiKey, params)
     }
 
     fun submitDocument(apiKey: String, params: RequestParams): MutableLiveData<SubmitResponse> {

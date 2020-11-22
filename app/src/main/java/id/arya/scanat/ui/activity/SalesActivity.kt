@@ -7,7 +7,6 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.location.LocationManager
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
@@ -46,13 +45,10 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class SalesActivity : AppCompatActivity() {
 
-    private lateinit var locationManager: LocationManager
     private var photoURI: Uri? = null
     private var latitude: String? = null
     private var longitude: String? = null
     private val REQUEST_IMAGE_CAPTURE = 1009
-    private var isgpsenable = false
-    private var isnetworkenable = false
 
     @Inject
     lateinit var sharedPrefManager: SharedPrefManager
@@ -62,15 +58,21 @@ class SalesActivity : AppCompatActivity() {
     private lateinit var bitmap: Bitmap
     private var photo: String = ""
     lateinit var currentPhotoPath: String
-    private val MIN_TIME_BW_UPDATES = 1000 * 60 * 1.toLong()
-    private val MIN_DISTANCE_CHANGE_FOR_UPDATES = 10f
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sales)
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
         dependency()
         getLocation()
         listener()
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return super.onSupportNavigateUp()
     }
 
     override fun onResume() {
@@ -92,9 +94,8 @@ class SalesActivity : AppCompatActivity() {
             mFusedLocation.lastLocation.addOnSuccessListener(
                 this
             ) { location ->
-                latitude = location.latitude.toString()
-                longitude = location.longitude.toString()
-
+                latitude = location?.latitude.toString()
+                longitude = location?.longitude.toString()
             }
         } else {
             Dexter.withContext(this@SalesActivity)

@@ -24,6 +24,12 @@ interface ApiInterface {
         @Body data: RequestParams
     ): Call<ListDocumentResponse>
 
+    @POST("Project/list_activity")
+    fun getListActivity(
+        @Header("x-api-key") apiKey: String,
+        @Body data: RequestParams
+    ): Call<ListActivityResponse>
+
     @POST("Content/list_tipe_document")
     fun getListTipeDocument(
         @Header("x-api-key") apiKey: String,

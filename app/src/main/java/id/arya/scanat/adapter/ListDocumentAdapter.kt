@@ -1,5 +1,6 @@
 package id.arya.scanat.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,17 +29,25 @@ class ListDocumentAdapter(val listDocumentResponse: ListDocumentResponse) :
         return listDocumentResponse.data.size
     }
 
+    @SuppressLint("SetTextI18n", "UseCompatLoadingForDrawables")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.itemView.apply {
             nomor_dokumen.text = "No : " + listDocumentResponse.data[position].dc_nomor
             tanggal_dokumen.text = listDocumentResponse.data[position].dc_tanggal
             tipe_dokumen.text = "Nama : " + listDocumentResponse.data[position].dc_tdc_kode
-            if (listDocumentResponse.data[position].dc_status == "1") {
-                status_dokumen.background = context.getDrawable(R.drawable.background_role_red)
-                status_dokumen.text = "close"
-                status_done.visibility = View.VISIBLE
-            } else {
-                status_dokumen.text = "open"
+            when (listDocumentResponse.data[position].dc_status) {
+                "1" -> {
+                    status_dokumen.background = context.getDrawable(R.drawable.background_role_red)
+                    status_dokumen.text = "close"
+                    status_done.visibility = View.VISIBLE
+                }
+                "3" -> {
+                    status_dokumen.background = context.getDrawable(R.drawable.background_role_blue)
+                    status_dokumen.text = "request"
+                }
+                else -> {
+                    status_dokumen.text = "open"
+                }
             }
             email_dokumen.text = "Email : " + listDocumentResponse.data[position].dc_email
             isi_keterangan_dokumen.text = listDocumentResponse.data[position].dc_keterangan

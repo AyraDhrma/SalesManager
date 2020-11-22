@@ -26,7 +26,7 @@
     <string name="project_detail">Project Detil</string>
     <string name="keterangan">Keterangan :</string>
     <string name="status">Status :</string>
-    <string name="document">Activity</string>
+    <string name="document">Document</string>
     <string name="new_document">New Activity</string>
     <string name="submit">Submit</string>
     <string name="activity">Activity</string>
@@ -44,6 +44,7 @@
     <string name="request_document">Request Document</string>
     <string name="tanggal">Tanggal</string>
     <string name="caption">Caption</string>
-    <string name="requestdocument">Document</string>
+    <string name="requestdocument">Req. Document</string>
     <string name="add_activity">Add Activity</string>
+    <string name="list_document">List Document</string>
 </resources>

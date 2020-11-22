@@ -25,7 +25,6 @@ import java.util.*
 import javax.inject.Inject
 import kotlin.collections.ArrayList
 
-
 @AndroidEntryPoint
 class EditDocument : AppCompatActivity() {
     @Inject
@@ -214,7 +213,7 @@ class EditDocument : AppCompatActivity() {
                     val requestParams = RequestParams(
                         "$tipeDoc|" +
                                 "${nomor_dokumen_activity.text.toString()}|$projectCode|${tanggal_dokumen_activity.text.toString()}|" +
-                                "${email_dokumen_activity.text.toString()}|$statusDoc|${keterangan_dokumen_activity.text.toString()}|" +
+                                "${email_dokumen_activity.text.toString()}||${keterangan_dokumen_activity.text.toString()}|" +
                                 idDoc
                     )
                     mainViewModel.updateDocument(sharedPrefManager.loadApiKey(), requestParams)
@@ -239,7 +238,7 @@ class EditDocument : AppCompatActivity() {
                     val requestParams = RequestParams(
                         "$tipeDoc|" +
                                 "${nomor_dokumen_activity.text.toString()}|$projectCode|${tanggal_dokumen_activity.text.toString()}|" +
-                                "${email_dokumen_activity.text.toString()}|$statusDoc|${keterangan_dokumen_activity.text.toString()}"
+                                "${email_dokumen_activity.text.toString()}||${keterangan_dokumen_activity.text.toString()}"
                     )
                     mainViewModel.submitDocument(sharedPrefManager.loadApiKey(), requestParams)
                         .observe(this, Observer { res ->
@@ -282,10 +281,6 @@ class EditDocument : AppCompatActivity() {
             }
             keterangan_dokumen_activity.text.toString() == "" -> {
                 keterangan_dokumen_activity.error = resources.getString(R.string.cannot_null)
-                istrue = false
-            }
-            statusDoc == "" -> {
-                Toast.makeText(this, "Status Tidak Boleh Kosong", Toast.LENGTH_SHORT).show()
                 istrue = false
             }
 

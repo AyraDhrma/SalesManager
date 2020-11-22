@@ -11,13 +11,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import id.arya.scanat.R
-import id.arya.scanat.adapter.ListDocumentAdapter
+import id.arya.scanat.adapter.ListActivityAdapter
 import id.arya.scanat.library.SharedPrefManager
 import id.arya.scanat.model.request.RequestParams
-import id.arya.scanat.model.response.ListDocumentResponse
+import id.arya.scanat.model.response.ListActivityResponse
 import id.arya.scanat.repository.MainRepository
 import id.arya.scanat.ui.activity.SalesActivity
-import id.arya.scanat.ui.document.EditDocument
+import id.arya.scanat.ui.document.ListDocumentActivity
 import id.arya.scanat.viewmodel.MainViewModel
 import id.arya.scanat.viewmodelfactory.MainFactory
 import kotlinx.android.synthetic.main.activity_project_detail.*
@@ -34,7 +34,7 @@ class ProjectDetail : AppCompatActivity() {
     lateinit var sharedPrefManager: SharedPrefManager
     private lateinit var mainViewModel: MainViewModel
     private lateinit var mainFactory: MainFactory
-    private lateinit var listDocumentAdapter: ListDocumentAdapter
+    private lateinit var listActivityAdapter: ListActivityAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +49,7 @@ class ProjectDetail : AppCompatActivity() {
 
     private fun listener() {
         add_document.setOnClickListener {
-            val intent = Intent(this, EditDocument::class.java)
+            val intent = Intent(this, ListDocumentActivity::class.java)
             intent.putExtra("project_code", projectCode)
             intent.putExtra("customer", customer)
             startActivity(intent)
@@ -120,66 +120,33 @@ class ProjectDetail : AppCompatActivity() {
         val projectCode = intent.getStringExtra("project_code")
         visibleLoading()
         val requestParams = RequestParams("|$projectCode")
-        mainViewModel.getListDocument(sharedPrefManager.loadApiKey(), requestParams)
+        mainViewModel.getListActivity(sharedPrefManager.loadApiKey(), requestParams)
             .observe(this, Observer { response ->
                 hideLoading()
                 hideEmptyAnim()
                 visibleListProject()
-                if (response.rc == "0000") {
-                    var responseList = ArrayList<ListDocumentResponse.Data>()
-                    responseList.clear()
-                    responseList = response.data
-                    listDocumentAdapter = ListDocumentAdapter(response)
-                    rv_list_document_detail.setHasFixedSize(true)
-                    rv_list_document_detail.layoutManager = LinearLayoutManager(this)
-                    rv_list_document_detail.adapter = listDocumentAdapter
-                    listDocumentAdapter.onSelectedDocument(object :
-                        ListDocumentAdapter.OnSelectedDocument {
-                        override fun onSelectedDocument(
-                            position: Int,
-                            listDocumentResponse: ArrayList<ListDocumentResponse.Data>
-                        ) {
-                            val intent = Intent(this@ProjectDetail, EditDocument::class.java)
-                            intent.putExtra("project_code", projectCode)
-                            intent.putExtra("activity", "edit")
-                            intent.putExtra("id_dokumen", listDocumentResponse[position].dc_id)
-                            intent.putExtra(
-                                "tipe_dokumen",
-                                listDocumentResponse[position].dc_tdc_kode
-                            )
-                            intent.putExtra(
-                                "nomor_dokumen",
-                                listDocumentResponse[position].dc_nomor
-                            )
-                            intent.putExtra(
-                                "tanggal_dokumen",
-                                listDocumentResponse[position].dc_tanggal
-                            )
-                            intent.putExtra(
-                                "email_dokumen",
-                                listDocumentResponse[position].dc_email
-                            )
-                            intent.putExtra(
-                                "status_dokumen",
-                                listDocumentResponse[position].dc_status
-                            )
-                            intent.putExtra(
-                                "keterangan_dokumen",
-                                listDocumentResponse[position].dc_keterangan
-                            )
-                            startActivity(intent)
-                        }
-                    })
-                } else if (response.message == "Document Not Found") {
-                    visibleEmptyAnim()
-                } else {
-                    val snackbar = Snackbar.make(
-                        document_title_detail,
-                        response.message,
-                        Snackbar.LENGTH_LONG
-                    )
-                    snackbar.view.setBackgroundColor(resources.getColor(R.color.colorError))
-                    snackbar.show()
+                when {
+                    response.rc == "0000" -> {
+                        var responseList = ArrayList<ListActivityResponse.Data>()
+                        responseList.clear()
+                        responseList = response.data
+                        val adapter = ListActivityAdapter(this, responseList)
+                        rv_list_document_detail.hasFixedSize()
+                        rv_list_document_detail.layoutManager = LinearLayoutManager(this)
+                        rv_list_document_detail.adapter = adapter
+                    }
+                    response.message == "Empty Activity" -> {
+                        visibleEmptyAnim()
+                    }
+                    else -> {
+                        val snackbar = Snackbar.make(
+                            document_title_detail,
+                            response.message,
+                            Snackbar.LENGTH_LONG
+                        )
+                        snackbar.view.setBackgroundColor(resources.getColor(R.color.colorError))
+                        snackbar.show()
+                    }
                 }
             })
     }

@@ -93,6 +93,7 @@
             android:layout_margin="16dp"
             android:fontFamily="@font/rubik_medium"
             android:text="@string/status"
+            android:visibility="gone"
             android:textColor="@color/colorFontSecondary"
             android:textSize="15sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -101,6 +102,7 @@
         <RadioGroup
             android:id="@+id/status_dokumen"
             android:layout_width="0dp"
+            android:visibility="gone"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintStart_toEndOf="@+id/status_title"
@@ -128,6 +130,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
+            android:layout_marginTop="16dp"
             android:background="@drawable/background_input"
             android:focusableInTouchMode="false"
             android:fontFamily="@font/rubik_regular"

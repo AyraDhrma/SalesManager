@@ -79,8 +79,7 @@ dependencies {
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttp3"
 
     // Glide
-    implementation "com.github.bumptech.glide:glide:$glide_version"
-    kapt "com.github.bumptech.glide:compiler:$glide_version"
+    implementation 'com.squareup.picasso:picasso:2.71828'
 
     implementation 'com.github.MdFarhanRaja:SearchableSpinner:2.1'
 
@@ -96,6 +95,7 @@ dependencies {
     implementation 'com.github.GrenderG:Toasty:1.5.0'
     implementation 'com.github.chrisbanes:PhotoView:2.0.0'
     implementation 'com.karumi:dexter:6.2.2'
+    implementation 'com.ablanco.zoomy:zoomy:1.1.0'
 
 
 }
