@@ -4,15 +4,22 @@ import android.app.Activity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import id.arya.scanat.R
 import id.arya.scanat.model.response.ListProductResponse
+import id.arya.scanat.utils.AllProductSearchFilter
 import kotlinx.android.synthetic.main.item_list_product.view.*
+
 
 class ListProductAdapter(
     val activity: Activity,
-    val listProduct: ArrayList<ListProductResponse.Data>
-) : RecyclerView.Adapter<ListProductAdapter.ViewHolder>() {
+    var listProduct: ArrayList<ListProductResponse.Data>
+) : RecyclerView.Adapter<ListProductAdapter.ViewHolder>(), Filterable {
+    private var searchFilter: AllProductSearchFilter? = null
+    private var menuFilter: ArrayList<ListProductResponse.Data> = listProduct
+
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     override fun getItemCount(): Int {
@@ -39,5 +46,12 @@ class ListProductAdapter(
                 parent, false
             )
         )
+    }
+
+    override fun getFilter(): Filter {
+        if (searchFilter == null) {
+            searchFilter = AllProductSearchFilter(this, menuFilter)
+        }
+        return searchFilter as AllProductSearchFilter
     }
 }

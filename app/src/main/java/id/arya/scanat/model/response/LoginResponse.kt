@@ -19,6 +19,9 @@ data class LoginResponse(
         @SerializedName("id_role") @Expose val id_role: String,
         @SerializedName("email") @Expose val email: String,
         @SerializedName("phone") @Expose val phone: String,
+        @SerializedName("prov") @Expose val prov: String,
+        @SerializedName("kabupaten") @Expose val kabupaten: String,
+        @SerializedName("tanggaldaftar") @Expose val tanggaldaftar: String,
         @SerializedName("message") @Expose val message: String
     )
 

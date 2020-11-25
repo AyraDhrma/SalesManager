@@ -43,6 +43,35 @@ constructor(url: String) {
         return responseApi
     }
 
+    fun hitSaveFirebaseId(
+        apiKey: String,
+        data: RequestParams
+    ): MutableLiveData<SubmitResponse> {
+        val responseApi: MutableLiveData<SubmitResponse> = MutableLiveData()
+
+        apiService.submitFfid(apiKey, data).enqueue(object : Callback<SubmitResponse> {
+            override fun onFailure(call: Call<SubmitResponse>, t: Throwable) {
+                Timber.d(TAG, t.localizedMessage)
+                responseApi.postValue(null)
+            }
+
+            override fun onResponse(
+                call: Call<SubmitResponse>,
+                response: Response<SubmitResponse>
+            ) {
+                if (response.isSuccessful) {
+                    responseApi.postValue(response.body())
+                    Timber.d(TAG, response.body().toString())
+                } else {
+                    responseApi.postValue(null)
+                    Timber.d(TAG, response.errorBody().toString())
+                }
+            }
+
+        })
+        return responseApi
+    }
+
     fun getListProject(
         apiKey: String,
         data: RequestParams
@@ -250,7 +279,7 @@ constructor(url: String) {
                     Timber.d(TAG, t.localizedMessage)
                     val data = LoginResponse.Data(
                         "", "", "", "",
-                        "", "", ""
+                        "", "", "", "", "", ""
                     )
                     val loginResponse = LoginResponse(
                         "error", t.localizedMessage,
@@ -269,7 +298,7 @@ constructor(url: String) {
                     } else {
                         val data = LoginResponse.Data(
                             "", "", "", "",
-                            "", "", ""
+                            "", "", "", "", "", ""
                         )
                         val loginResponse = LoginResponse(
                             "error", response.errorBody().toString(),

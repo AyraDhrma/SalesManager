@@ -1,6 +1,8 @@
 package id.arya.scanat.ui.product
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -26,6 +28,8 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class ListProductActivity : AppCompatActivity() {
 
+    private lateinit var adapter: ListProductAdapter
+
     @Inject
     lateinit var sharedPrefManager: SharedPrefManager
     private lateinit var mainViewModel: MainViewModel
@@ -39,6 +43,23 @@ class ListProductActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowTitleEnabled(false)
         getListProduct()
+    }
+
+    private fun searchProduct() {
+        search_product.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                adapter.filter.filter(s)
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                adapter.filter.filter(s)
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                adapter.filter.filter(s)
+            }
+
+        })
     }
 
     private fun dependency() {
@@ -60,10 +81,11 @@ class ListProductActivity : AppCompatActivity() {
                         var responseList = ArrayList<ListProductResponse.Data>()
                         responseList.clear()
                         responseList = response.data
-                        val adapter = ListProductAdapter(this, responseList)
+                        adapter = ListProductAdapter(this, responseList)
                         rv_list_product.hasFixedSize()
                         rv_list_product.layoutManager = LinearLayoutManager(this)
                         rv_list_product.adapter = adapter
+                        searchProduct()
                     }
                     response.message == "Empty" -> {
                         visibleEmptyAnim()

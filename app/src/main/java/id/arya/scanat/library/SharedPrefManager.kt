@@ -25,6 +25,10 @@ constructor(@ApplicationContext val context: Context) {
     private val KEY = "key"
     private val IMG_BANNER = "img_banner"
     private val GREETINGS = "greetings"
+    private val PROV = "prov"
+    private val KAB = "kab"
+    private val TGLDAFTAR = "tgldaftar"
+    private val FIREBASEID = "firebaseiid"
 
     fun saveUserData(loginResponse: LoginResponse) {
         val sharedPreferences =
@@ -36,8 +40,29 @@ constructor(@ApplicationContext val context: Context) {
         edit?.putString(IDROLE, loginResponse.data.id_role)
         edit?.putString(EMAIL, loginResponse.data.email)
         edit?.putString(PHONE, loginResponse.data.phone)
+        edit?.putString(PROV, loginResponse.data.prov)
+        edit?.putString(KAB, loginResponse.data.kabupaten)
+        edit?.putString(TGLDAFTAR, loginResponse.data.tanggaldaftar)
         edit?.putString(MESSAGE, loginResponse.data.message)
         edit?.apply()
+    }
+
+    fun loadUserData(): LoginResponse.Data {
+        val sharedPreferences =
+            context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
+        val loginResponse = LoginResponse.Data(
+            sharedPreferences.getString(USERNAME, "").toString(),
+            sharedPreferences.getString(PASSWORD, "").toString(),
+            sharedPreferences.getString(NAMA, "").toString(),
+            sharedPreferences.getString(IDROLE, "").toString(),
+            sharedPreferences.getString(EMAIL, "").toString(),
+            sharedPreferences.getString(PHONE, "").toString(),
+            sharedPreferences.getString(PROV, "").toString(),
+            sharedPreferences.getString(KAB, "").toString(),
+            sharedPreferences.getString(TGLDAFTAR, "").toString(),
+            ""
+        )
+        return loginResponse
     }
 
     fun saveSplashData(splashScreenResponse: SplashScreenResponse) {
@@ -51,6 +76,20 @@ constructor(@ApplicationContext val context: Context) {
         edit?.putString(IMG_BANNER, splashScreenResponse.img_banner)
         edit?.putString(GREETINGS, splashScreenResponse.greetings)
         edit?.apply()
+    }
+
+    fun saveFirebaseId(id: String) {
+        val sharedPreferences =
+            context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
+        val edit = sharedPreferences.edit()
+        edit?.putString(FIREBASEID, id)
+        edit?.apply()
+    }
+
+    fun loadFirebaseId(): String {
+        val sharedPreferences =
+            context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
+        return sharedPreferences.getString(FIREBASEID, "").toString()
     }
 
     fun loadUrl(): String {

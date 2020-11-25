@@ -216,8 +216,10 @@ class EditDocument : AppCompatActivity() {
                                 "${email_dokumen_activity.text.toString()}||${keterangan_dokumen_activity.text.toString()}|" +
                                 idDoc
                     )
+                    showLoadingDialog()
                     mainViewModel.updateDocument(sharedPrefManager.loadApiKey(), requestParams)
                         .observe(this, Observer { res ->
+                            dismissLoadingDialog()
                             if (res.rc == "0000") {
                                 Toast.makeText(this, res.message, Toast.LENGTH_SHORT).show()
                                 finish()
@@ -240,8 +242,10 @@ class EditDocument : AppCompatActivity() {
                                 "${nomor_dokumen_activity.text.toString()}|$projectCode|${tanggal_dokumen_activity.text.toString()}|" +
                                 "${email_dokumen_activity.text.toString()}||${keterangan_dokumen_activity.text.toString()}"
                     )
+                    showLoadingDialog()
                     mainViewModel.submitDocument(sharedPrefManager.loadApiKey(), requestParams)
                         .observe(this, Observer { res ->
+                            dismissLoadingDialog()
                             if (res.rc == "0000") {
                                 Toast.makeText(this, res.message, Toast.LENGTH_SHORT).show()
                                 finish()
@@ -265,10 +269,6 @@ class EditDocument : AppCompatActivity() {
         when {
             tipe_dokumen_activity.text.toString() == "" -> {
                 tipe_dokumen_activity.error = resources.getString(R.string.cannot_null)
-                istrue = false
-            }
-            nomor_dokumen_activity.text.toString() == "" -> {
-                nomor_dokumen_activity.error = resources.getString(R.string.cannot_null)
                 istrue = false
             }
             tanggal_dokumen_activity.text.toString() == "" -> {

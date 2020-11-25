@@ -129,6 +129,7 @@ class MainActivity : AppCompatActivity() {
             .observe(this, Observer { response ->
                 hideLoading()
                 visibleListProject()
+                saveFirebaseId()
                 if (response.rc == "0000") {
                     target_title_main.text = "Target ${response.data[0].target_year}"
                     target.progress = response.data[0].target_jumlah.toInt()
@@ -161,6 +162,7 @@ class MainActivity : AppCompatActivity() {
                         }
                     })
                 } else {
+                    saveFirebaseId()
                     val snackbar = Snackbar.make(
                         project_title_main,
                         response.message,
@@ -191,6 +193,7 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         getListProject()
+        saveFirebaseId()
     }
 
     fun visibleLoading() {
@@ -207,6 +210,17 @@ class MainActivity : AppCompatActivity() {
 
     fun hideLoading() {
         progress_bar.visibility = View.GONE
+    }
+
+    fun saveFirebaseId() {
+        val requestParams = RequestParams(
+            sharedPrefManager.loadSalesCode() + "|" +
+                    sharedPrefManager.loadFirebaseId()
+        )
+        mainViewModel.submitFFID(sharedPrefManager.loadApiKey(), requestParams)
+            .observe(this, Observer { response ->
+
+            })
     }
 
 }

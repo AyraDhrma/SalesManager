@@ -39,6 +39,12 @@ class ProfileActivity : AppCompatActivity() {
         mainFactory = MainFactory(MainRepository(url))
         mainViewModel = ViewModelProvider(this, mainFactory)[MainViewModel::class.java]
 
+        nama_profile.text = sharedPrefManager.loadUserData().nama
+        email_profile.text = sharedPrefManager.loadUserData().email
+        phone_profile.text = sharedPrefManager.loadUserData().phone
+        prov_profile.text = sharedPrefManager.loadUserData().prov
+        kab_profile.text = sharedPrefManager.loadUserData().kabupaten
+
         logout.setOnClickListener {
             sharedPrefManager.clearUserData()
             val intent = Intent(this@ProfileActivity, LoginActivity::class.java)

@@ -75,6 +75,14 @@ class SalesActivity : AppCompatActivity() {
         listener()
     }
 
+    private fun showLoadingDialog() {
+        loadingDialog.show(supportFragmentManager, "LOADING")
+    }
+
+    private fun dismissLoadingDialog() {
+        loadingDialog.dismiss()
+    }
+
     override fun onSupportNavigateUp(): Boolean {
         finish()
         return super.onSupportNavigateUp()
@@ -82,8 +90,8 @@ class SalesActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        getLocation()
         checkGpsOn()
+        getLocation()
     }
 
     private fun checkGpsOn(): Boolean {
@@ -166,7 +174,6 @@ class SalesActivity : AppCompatActivity() {
                 }
                 .check()
         }
-
     }
 
     private fun listener() {
@@ -197,6 +204,7 @@ class SalesActivity : AppCompatActivity() {
 
         add_activity.setOnClickListener {
             if (validate()) {
+                getLocation()
                 val projectCode = intent.getStringExtra("project_code")
                 val caption = keterangan_dokumen_activity.text.toString()
                 val slcode = sharedPrefManager.loadSalesCode()
@@ -207,8 +215,10 @@ class SalesActivity : AppCompatActivity() {
                             "$slcode|$customer|$projectCode|||$photo|$latitude#$longitude|$caption" +
                             ""
                 )
+                showLoadingDialog()
                 mainViewModel.submitActivity(sharedPrefManager.loadApiKey(), requestParams)
                     .observe(this, Observer { res ->
+                        dismissLoadingDialog()
                         if (res.rc == "0000") {
                             Toasty.success(
                                 this@SalesActivity, res.message,

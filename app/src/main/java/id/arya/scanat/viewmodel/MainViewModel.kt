@@ -55,4 +55,8 @@ class MainViewModel(private val repository: MainRepository): ViewModel() {
         return repository.updateDocument(apiKey, params)
     }
 
+    fun submitFFID(apiKey: String, params: RequestParams): MutableLiveData<SubmitResponse> {
+        return repository.hitSaveFirebaseId(apiKey, params)
+    }
+
 }

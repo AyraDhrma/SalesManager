@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SalesForce</string>
+    <string name="app_name">SalesManager</string>
     <string name="scan_assets">SCAN ASSETS</string>
     <string name="turn_on_flashlight">Off</string>
     <string name="scan">Scan QR/Barcode</string>
@@ -59,4 +59,9 @@
     <string name="satuan">Satuan :</string>
     <string name="berat">Berat :</string>
     <string name="realise">Realise</string>
+    <string name="nama_title">Nama</string>
+    <string name="email_title">Email</string>
+    <string name="phone_title">Phone</string>
+    <string name="provinsi_title">Provinsi</string>
+    <string name="kabupaten">Kabupaten</string>
 </resources>

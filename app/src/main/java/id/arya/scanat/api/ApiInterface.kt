@@ -54,6 +54,12 @@ interface ApiInterface {
         @Body data: RequestParams
     ): Call<SubmitResponse>
 
+    @POST("Auth/save_firebase_id")
+    fun submitFfid(
+        @Header("x-api-key") apiKey: String,
+        @Body data: RequestParams
+    ): Call<SubmitResponse>
+
     @POST("Project/add_new_activity")
     fun submitActivity(
         @Header("x-api-key") apiKey: String,

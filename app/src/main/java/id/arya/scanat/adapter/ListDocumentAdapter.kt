@@ -38,15 +38,23 @@ class ListDocumentAdapter(val listDocumentResponse: ListDocumentResponse) :
             when (listDocumentResponse.data[position].dc_status) {
                 "1" -> {
                     status_dokumen.background = context.getDrawable(R.drawable.background_role_red)
-                    status_dokumen.text = "close"
+                    if (listDocumentResponse.data[position].dc_kondisi == "0") {
+                        status_dokumen.text = "Close (Failed)"
+                    } else {
+                        status_dokumen.text = "Close (Approved)"
+                    }
                     status_done.visibility = View.VISIBLE
                 }
                 "3" -> {
                     status_dokumen.background = context.getDrawable(R.drawable.background_role_blue)
-                    status_dokumen.text = "request"
+                    status_dokumen.text = "Request"
                 }
                 else -> {
-                    status_dokumen.text = "open"
+                    if (listDocumentResponse.data[position].dc_kondisi == "0") {
+                        status_dokumen.text = "Open (Failed)"
+                    } else {
+                        status_dokumen.text = "Open (Approved)"
+                    }
                 }
             }
             email_dokumen.text = "Email : " + listDocumentResponse.data[position].dc_email

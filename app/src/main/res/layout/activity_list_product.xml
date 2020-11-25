@@ -59,17 +59,32 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar_layout" />
 
+        <EditText
+            android:id="@+id/search_product"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:drawableStart="@drawable/ic_search"
+            android:drawablePadding="@dimen/_8sdp"
+            android:fontFamily="@font/rubik_regular"
+            android:padding="@dimen/_12sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar_layout" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_list_product"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="@dimen/_4sdp"
+            android:layout_marginTop="@dimen/_8sdp"
             android:overScrollMode="never"
             android:paddingBottom="@dimen/_8sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbar_layout" />
+            app:layout_constraintTop_toBottomOf="@id/search_product" />
 
         <ProgressBar
             android:id="@+id/progress_bar"

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "217664086677",
+    "firebase_url": "https://salesmanager-8b8e3.firebaseio.com",
+    "project_id": "salesmanager-8b8e3",
+    "storage_bucket": "salesmanager-8b8e3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:217664086677:android:ead77dd780dc506656f19c",
+        "android_client_info": {
+          "package_name": "id.arya.scanat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "217664086677-2dbt6q65uirrt7152slnchpbmbknfi2p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC56swPf8p3nB8R3DE5xUC3q3x1d-yPs9A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "217664086677-2dbt6q65uirrt7152slnchpbmbknfi2p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

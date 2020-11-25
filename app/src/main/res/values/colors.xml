@@ -11,4 +11,5 @@
     <color name="colorBlue">#3A34A3</color>
     <color name="colorYellow">#f1c40f</color>
     <color name="colorFontSecondary">#34495e</color>
+    <color name="colorFontTertiary">#A0A4A8</color>
 </resources>

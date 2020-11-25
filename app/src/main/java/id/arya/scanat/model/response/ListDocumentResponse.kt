@@ -20,6 +20,7 @@ data class ListDocumentResponse(
         @SerializedName("dc_tanggal") @Expose val dc_tanggal: String,
         @SerializedName("dc_email") @Expose val dc_email: String,
         @SerializedName("dc_status") @Expose val dc_status: String,
+        @SerializedName("dc_kondisi") @Expose val dc_kondisi: String,
         @SerializedName("dc_keterangan") @Expose val dc_keterangan: String,
         @SerializedName("dc_created") @Expose val dc_created: String,
         @SerializedName("dc_modify") @Expose val dc_modify: String
