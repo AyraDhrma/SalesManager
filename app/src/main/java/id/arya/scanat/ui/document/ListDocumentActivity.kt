@@ -3,6 +3,7 @@ package id.arya.scanat.ui.document
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -48,6 +49,13 @@ class ListDocumentActivity : AppCompatActivity() {
             intent.putExtra("project_code", projectCode)
             intent.putExtra("customer", customer)
             startActivity(intent)
+        }
+
+        swipe_refresh.setOnRefreshListener {
+            Handler().postDelayed({ // Berhenti berputar/refreshing
+                swipe_refresh.isRefreshing = false
+                getListDocument()
+            }, 2000)
         }
     }
 

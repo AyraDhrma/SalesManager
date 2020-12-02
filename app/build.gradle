@@ -100,7 +100,7 @@ dependencies {
     implementation 'com.karumi:dexter:6.2.2'
     implementation 'com.ablanco.zoomy:zoomy:1.1.0'
     implementation 'com.shreyaspatil:MaterialDialog:2.1'
-    implementation 'com.github.lzyzsd:circleprogress:1.2.1'
+    implementation 'com.zekapp.library:progreswheelview:1.1.5'
 
     // Firebase
     implementation platform('com.google.firebase:firebase-bom:26.1.0')

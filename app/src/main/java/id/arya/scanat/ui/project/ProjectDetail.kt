@@ -1,8 +1,11 @@
 package id.arya.scanat.ui.project
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
+import android.location.LocationManager
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -12,6 +15,7 @@ import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import id.arya.scanat.R
 import id.arya.scanat.adapter.ListActivityAdapter
+import id.arya.scanat.costumeui.DialogFragmentGps
 import id.arya.scanat.library.SharedPrefManager
 import id.arya.scanat.model.request.RequestParams
 import id.arya.scanat.model.response.ListActivityResponse
@@ -44,7 +48,21 @@ class ProjectDetail : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowTitleEnabled(false)
         getListDocument()
-        listener()
+    }
+
+    private fun checkGpsOn(): Boolean {
+        var isGpsOn = false
+        val manager: LocationManager =
+            this.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+
+        isGpsOn = if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            val dialogFragmentGps = DialogFragmentGps()
+            dialogFragmentGps.show(supportFragmentManager, "GPS")
+            false
+        } else {
+            true
+        }
+        return isGpsOn
     }
 
     private fun listener() {
@@ -60,6 +78,13 @@ class ProjectDetail : AppCompatActivity() {
             intent.putExtra("project_code", projectCode)
             intent.putExtra("customer", customer)
             startActivity(intent)
+        }
+
+        swipe_refresh.setOnRefreshListener {
+            Handler().postDelayed({ // Berhenti berputar/refreshing
+                swipe_refresh.isRefreshing = false
+                getListDocument()
+            }, 2000)
         }
     }
 
@@ -134,9 +159,15 @@ class ProjectDetail : AppCompatActivity() {
                         rv_list_document_detail.hasFixedSize()
                         rv_list_document_detail.layoutManager = LinearLayoutManager(this)
                         rv_list_document_detail.adapter = adapter
+
+                        listener()
+
                     }
                     response.message == "Empty Activity" -> {
                         visibleEmptyAnim()
+
+                        listener()
+
                     }
                     else -> {
                         val snackbar = Snackbar.make(
@@ -146,6 +177,9 @@ class ProjectDetail : AppCompatActivity() {
                         )
                         snackbar.view.setBackgroundColor(resources.getColor(R.color.colorError))
                         snackbar.show()
+
+                        listener()
+
                     }
                 }
             })
@@ -153,6 +187,7 @@ class ProjectDetail : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        checkGpsOn()
         getListDocument()
     }
 

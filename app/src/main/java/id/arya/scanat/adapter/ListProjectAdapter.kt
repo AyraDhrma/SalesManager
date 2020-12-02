@@ -32,7 +32,7 @@ class ListProjectAdapter(val listProjectResponse: ListProjectResponse) :
         holder.itemView.apply {
             project_name_list.text = listProjectResponse.data[position].pj_nama
             project_customer_list.text =
-                "Costumer : " + listProjectResponse.data[position].pj_cu_kode
+                "Costumer : " + listProjectResponse.data[position].pj_cu_name
             project_date_list.text = listProjectResponse.data[position].pj_tanggal
             if (listProjectResponse.data[position].pj_status != null) {
                 project_status_list.text =

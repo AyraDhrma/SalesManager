@@ -45,7 +45,6 @@ class EditDocument : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowTitleEnabled(false)
         checkEditOrNew()
-        listener()
     }
 
     private fun checkEditOrNew() {
@@ -109,6 +108,8 @@ class EditDocument : AppCompatActivity() {
                         spinnerDialog.showSpinerDialog()
                     }
 
+                    listener()
+
                 } else {
                     val snackbar = Snackbar.make(
                         tipe_dokumen_activity,
@@ -147,6 +148,8 @@ class EditDocument : AppCompatActivity() {
                         }
                         spinnerDialog.showSpinerDialog()
                     }
+
+                    listener()
 
                 } else {
                     val snackbar = Snackbar.make(

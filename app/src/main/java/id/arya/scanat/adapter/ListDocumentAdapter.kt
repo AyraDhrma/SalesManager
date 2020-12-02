@@ -45,7 +45,7 @@ class ListDocumentAdapter(val listDocumentResponse: ListDocumentResponse) :
                     }
                     status_done.visibility = View.VISIBLE
                 }
-                "3" -> {
+                "2" -> {
                     status_dokumen.background = context.getDrawable(R.drawable.background_role_blue)
                     status_dokumen.text = "Request"
                 }

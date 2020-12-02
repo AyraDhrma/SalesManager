@@ -79,7 +79,6 @@
             android:fontFamily="@font/rubik_regular"
             android:hint="@string/nomor_dokumen"
             android:inputType="text"
-            android:visibility="gone"
             android:padding="16dp"
             android:textCursorDrawable="@drawable/black_cursor"
             app:layout_constraintEnd_toEndOf="parent"

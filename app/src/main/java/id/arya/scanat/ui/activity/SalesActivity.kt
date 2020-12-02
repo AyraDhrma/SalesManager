@@ -72,7 +72,6 @@ class SalesActivity : AppCompatActivity() {
         supportActionBar?.setDisplayShowTitleEnabled(false)
         dependency()
         getLocation()
-        listener()
     }
 
     private fun showLoadingDialog() {
@@ -138,6 +137,7 @@ class SalesActivity : AppCompatActivity() {
             ) { location ->
                 latitude = location?.latitude.toString()
                 longitude = location?.longitude.toString()
+                listener()
             }
         } else {
             Dexter.withContext(this@SalesActivity)

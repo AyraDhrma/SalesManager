@@ -18,6 +18,7 @@ data class ListProjectResponse(
         @SerializedName("pj_nama") @Expose val pj_nama: String,
         @SerializedName("pj_sl_kode") @Expose val pj_sl_kode: String,
         @SerializedName("pj_cu_kode") @Expose val pj_cu_kode: String,
+        @SerializedName("pj_cu_name") @Expose val pj_cu_name: String,
         @SerializedName("pj_nominal_anggaran") @Expose val pj_nominal_anggaran: String,
         @SerializedName("target_year") @Expose val target_year: String,
         @SerializedName("target_jumlah") @Expose val target_jumlah: String,

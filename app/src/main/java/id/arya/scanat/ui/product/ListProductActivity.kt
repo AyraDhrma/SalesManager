@@ -1,6 +1,7 @@
 package id.arya.scanat.ui.product
 
 import android.os.Bundle
+import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
@@ -19,10 +20,6 @@ import id.arya.scanat.repository.MainRepository
 import id.arya.scanat.viewmodel.MainViewModel
 import id.arya.scanat.viewmodelfactory.MainFactory
 import kotlinx.android.synthetic.main.activity_list_product.*
-import kotlinx.android.synthetic.main.activity_list_product.empty
-import kotlinx.android.synthetic.main.activity_list_product.progress_bar
-import kotlinx.android.synthetic.main.activity_list_product.toolbar
-import kotlinx.android.synthetic.main.activity_project_detail.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -86,21 +83,33 @@ class ListProductActivity : AppCompatActivity() {
                         rv_list_product.layoutManager = LinearLayoutManager(this)
                         rv_list_product.adapter = adapter
                         searchProduct()
+                        listener()
                     }
                     response.message == "Empty" -> {
                         visibleEmptyAnim()
+                        listener()
                     }
                     else -> {
                         val snackbar = Snackbar.make(
-                            document_title_detail,
+                            toolbar_layout,
                             response.message,
                             Snackbar.LENGTH_LONG
                         )
                         snackbar.view.setBackgroundColor(resources.getColor(R.color.colorError))
                         snackbar.show()
+                        listener()
                     }
                 }
             })
+    }
+
+    fun listener() {
+        swipe_refresh.setOnRefreshListener {
+            Handler().postDelayed({
+                swipe_refresh.isRefreshing = false
+                getListProduct()
+            }, 2000)
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {

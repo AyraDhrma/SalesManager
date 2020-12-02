@@ -33,12 +33,16 @@ import id.arya.scanat.ui.project.ProjectDetail
 import id.arya.scanat.viewmodel.MainViewModel
 import id.arya.scanat.viewmodelfactory.MainFactory
 import kotlinx.android.synthetic.main.activity_main.*
+import java.text.NumberFormat
+import java.util.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private var doubleBackToExitPressedOnce = false
+    private var targetVal = 0
+    private var realizeVal = 0
 
     @Inject
     lateinit var sharedPrefManager: SharedPrefManager
@@ -101,6 +105,12 @@ class MainActivity : AppCompatActivity() {
         product_img_main.setOnClickListener {
             startActivity(Intent(this@MainActivity, ListProductActivity::class.java))
         }
+        swipe_refresh.setOnRefreshListener {
+            Handler().postDelayed({
+                swipe_refresh.isRefreshing = false
+                getListProject()
+            }, 2000)
+        }
     }
 
     private fun dependency() {
@@ -131,11 +141,34 @@ class MainActivity : AppCompatActivity() {
                 visibleListProject()
                 saveFirebaseId()
                 if (response.rc == "0000") {
-                    target_title_main.text = "Target ${response.data[0].target_year}"
-                    target.progress = response.data[0].target_jumlah.toInt()
-                    target.finishedColor = resources.getColor(R.color.colorPrimary)
-                    realise.progress = response.data[0].target_realis.toInt()
-                    realise.finishedColor = resources.getColor(R.color.colorPrimary)
+                    if (response.data[0].target_jumlah != "") {
+                        targetVal = response.data[0].target_jumlah.toInt()
+                        target.setmValueText(
+                            "Rp " + NumberFormat.getNumberInstance(Locale("in", "ID"))
+                                .format(Integer.valueOf(response.data[0].target_jumlah.toInt()))
+                        )
+                        target.setmDefText("Target ${response.data[0].target_year}")
+                        target.setmPercentage(100)
+                    } else {
+                        target.setmValueText("")
+                        target.setmDefText("No Target")
+                        target.setmPercentage(0)
+                    }
+                    if (response.data[0].target_realis != "") {
+                        realizeVal = response.data[0].target_realis.toInt()
+                        realise.setmValueText(
+                            "Rp " + NumberFormat.getNumberInstance(Locale("in", "ID"))
+                                .format(Integer.valueOf(response.data[0].target_realis.toInt()))
+                        )
+                        realise.setmDefText("Realize ${response.data[0].target_year}")
+                        val percentage = (realizeVal.toDouble() / targetVal) * 100
+                        realise.setmPercentage(percentage.toInt())
+                    } else {
+                        realise.setmValueText("")
+                        realise.setmDefText("No Target")
+                        realise.setmPercentage(0)
+                    }
+
                     listProjectAdapter = ListProjectAdapter(response)
                     rv_list_project_main.setHasFixedSize(true)
                     rv_list_project_main.layoutManager = LinearLayoutManager(this)
@@ -176,6 +209,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         if (doubleBackToExitPressedOnce) {
+            sharedPrefManager.clearUserData()
             finish()
             return
         }

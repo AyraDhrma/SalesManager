@@ -64,4 +64,7 @@
     <string name="phone_title">Phone</string>
     <string name="provinsi_title">Provinsi</string>
     <string name="kabupaten">Kabupaten</string>
+    <string name="default_notification_channel_id">1040</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="sales_code">Sales Code</string>
 </resources>
