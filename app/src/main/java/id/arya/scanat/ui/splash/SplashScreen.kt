@@ -60,7 +60,7 @@ class SplashScreen : AppCompatActivity() {
     }
 
     private fun initDependency() {
-        val url = "http://103.82.242.80/crmapi/"
+        val url = "http://www.salesminara.com/crmapi/"
         splashScreenFactory = SplashScreenFactory(MainRepository(url))
         splashViewModel = ViewModelProvider(this, splashScreenFactory)[SplashViewModel::class.java]
     }

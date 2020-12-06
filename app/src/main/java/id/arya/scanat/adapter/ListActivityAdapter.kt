@@ -25,7 +25,7 @@ class ListActivityAdapter(
     @SuppressLint("UseCompatLoadingForDrawables")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.itemView.apply {
-            if (listActivity[position].ls_gambar == null) {
+            if (listActivity[position].ls_gambar == "") {
                 image_activity.setImageDrawable(context.resources.getDrawable(R.drawable.no_photo))
             } else {
                 Picasso.get()

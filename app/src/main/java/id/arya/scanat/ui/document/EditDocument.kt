@@ -44,6 +44,11 @@ class EditDocument : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowTitleEnabled(false)
+        if (intent.getStringExtra("activity") == "edit") {
+            supportActionBar?.title = "Edit Document"
+        } else {
+            supportActionBar?.title = "Request Document"
+        }
         checkEditOrNew()
     }
 

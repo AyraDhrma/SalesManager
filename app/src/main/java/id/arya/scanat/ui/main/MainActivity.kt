@@ -181,7 +181,7 @@ class MainActivity : AppCompatActivity() {
                         ) {
                             val intent = Intent(this@MainActivity, ProjectDetail::class.java)
                             intent.putExtra("project_name", listProjectResponse[position].pj_nama)
-                            intent.putExtra("customer", listProjectResponse[position].pj_cu_kode)
+                            intent.putExtra("customer", listProjectResponse[position].pj_cu_name)
                             intent.putExtra("project_code", listProjectResponse[position].pj_kode)
                             intent.putExtra(
                                 "project_status",
