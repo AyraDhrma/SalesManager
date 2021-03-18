@@ -141,11 +141,11 @@ class MainActivity : AppCompatActivity() {
                 visibleListProject()
                 saveFirebaseId()
                 if (response.rc == "0000") {
-                    if (response.data[0].target_jumlah != "") {
-                        targetVal = response.data[0].target_jumlah.toInt()
+                    if (response.data[0].target_jumlah != null) {
+                        targetVal = response.data[0].target_jumlah!!
                         target.setmValueText(
                             "Rp " + NumberFormat.getNumberInstance(Locale("in", "ID"))
-                                .format(Integer.valueOf(response.data[0].target_jumlah.toInt()))
+                                .format(response.data[0].target_jumlah)
                         )
                         target.setmDefText("Target ${response.data[0].target_year}")
                         target.setmPercentage(100)
@@ -154,11 +154,11 @@ class MainActivity : AppCompatActivity() {
                         target.setmDefText("No Target")
                         target.setmPercentage(0)
                     }
-                    if (response.data[0].target_realis != "") {
-                        realizeVal = response.data[0].target_realis.toInt()
+                    if (response.data[0].target_realis != null) {
+                        realizeVal = response.data[0].target_realis!!
                         realise.setmValueText(
                             "Rp " + NumberFormat.getNumberInstance(Locale("in", "ID"))
-                                .format(Integer.valueOf(response.data[0].target_realis.toInt()))
+                                .format(response.data[0].target_realis)
                         )
                         realise.setmDefText("Realize ${response.data[0].target_year}")
                         val percentage = (realizeVal.toDouble() / targetVal) * 100
