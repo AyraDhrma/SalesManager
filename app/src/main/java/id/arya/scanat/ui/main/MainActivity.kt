@@ -41,8 +41,6 @@ import javax.inject.Inject
 class MainActivity : AppCompatActivity() {
 
     private var doubleBackToExitPressedOnce = false
-    private var targetVal = 0
-    private var realizeVal = 0
 
     @Inject
     lateinit var sharedPrefManager: SharedPrefManager
@@ -141,11 +139,9 @@ class MainActivity : AppCompatActivity() {
                 visibleListProject()
                 saveFirebaseId()
                 if (response.rc == "0000") {
-                    if (response.data[0].target_jumlah != null) {
-                        targetVal = response.data[0].target_jumlah!!
+                    if (response.data[0].target_jumlah != "") {
                         target.setmValueText(
-                            "Rp " + NumberFormat.getNumberInstance(Locale("in", "ID"))
-                                .format(response.data[0].target_jumlah)
+                            "Rp " + response.data[0].target_jumlah
                         )
                         target.setmDefText("Target ${response.data[0].target_year}")
                         target.setmPercentage(100)
@@ -154,15 +150,12 @@ class MainActivity : AppCompatActivity() {
                         target.setmDefText("No Target")
                         target.setmPercentage(0)
                     }
-                    if (response.data[0].target_realis != null) {
-                        realizeVal = response.data[0].target_realis!!
+                    if (response.data[0].target_realis != "") {
                         realise.setmValueText(
-                            "Rp " + NumberFormat.getNumberInstance(Locale("in", "ID"))
-                                .format(response.data[0].target_realis)
+                            "Rp " + response.data[0].target_realis
                         )
                         realise.setmDefText("Realize ${response.data[0].target_year}")
-                        val percentage = (realizeVal.toDouble() / targetVal) * 100
-                        realise.setmPercentage(percentage.toInt())
+                        realise.setmPercentage(response.data[0].percentage.toInt())
                     } else {
                         realise.setmValueText("")
                         realise.setmDefText("No Target")
